@@ -11,11 +11,13 @@ Voici les objectifs de ce cours  :
    3. [Créer un fichier README.md](#créer-un-fichier-readmemd)
 2. [Connexion avec son compte GitHub](#connexion-avec-son-compte-github)
    1. [Générer une clé SSH](#générer-une-clé-ssh)
-   2. [Lancer l'agent SSH](#lancer-lagent-ssh)
-   3. [Ajouter une clé SSH à l'agent](#ajouter-une-clé-ssh-à-lagent)
-   4. [Afficher la clé publique SSH](#afficher-la-clé-publique-ssh)
-   5. [Ajouter la clé SSH](#ajouter-la-clé-ssh)
-   6. [Tester la connexion SSH avec GitHub](#tester-la-connexion-ssh-avec-github)
+   2. [Nommer le fichier qui stockera les clés](#nommer-le-fichier-qui-stockera-les-clés)
+   3. [Définir un mot de passe pour protéger la clé privée](#définir-un-mot-de-passe-pour-protéger-la-clé-privée)
+   4. [Lancer l'agent SSH](#lancer-lagent-ssh)
+   5. [Ajouter une clé SSH à l'agent](#ajouter-une-clé-ssh-à-lagent)
+   6. [Afficher la clé publique SSH](#afficher-la-clé-publique-ssh)
+   7. [Ajouter la clé SSH](#ajouter-la-clé-ssh)
+   8. [Tester la connexion SSH avec GitHub](#tester-la-connexion-ssh-avec-github)
 3. [Collaborer avec son dépôt distant](#collaborer-avec-son-dépôt-distant)
    1. [Créer un dépôt distant](#créer-un-dépôt-distant)
    2. [Ajouter une origine distante](#ajouter-une-origine-distante)
@@ -84,8 +86,46 @@ Explication des éléments :
 - `-b 4096` : Définit la longueur de la clé à 4096 bits.
 - `-C` : Ajoute un commentaire, ici l'email, pour identifier la clé.
 
+
+## Nommer le fichier qui stockera les clés
+Lors de la génération de la clé SSH, on vous demande où enregistrer le fichier contenant la clé privée et la clé publique.
+
+```bash
+Enter file in which to save the key (/c/Users/xxx/.ssh/id_rsa): toto
+```
+
+Ici, vous avez choisi *toto* comme nom de fichier.
+Cela crée deux fichiers :
+
+`toto ` : La clé privée (NE JAMAIS PARTAGER !)
+`toto.pub` : La clé publique (à partager sur GitHub ou d'autres serveurs pour s'authentifier)
+Par défaut, si vous ne spécifiez pas de nom, les clés sont enregistrées dans `~/.ssh/id_rsa` (clé privée) et `~/.ssh/id_rsa.pub` (clé publique).
+
+Où est-elle enregistrée ?
+Si vous ne précisez que le nom du fichier, la clé sera créée dans le dossier en cours dans la session Bash. 
+C'est ce qu'on appelle le répertoire actif (ou Active Directory dans Git Bash).
+
+Pour voir dans quel dossier vous êtes :
+
+```bash
+pwd
+```
+
+## Définir un mot de passe pour protéger la clé privée
+Après avoir choisi un nom de fichier, le terminal vous demande de saisir un passphrase (mot de passe) :
+
+```bash
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+```
+
+Pourquoi mettre un mot de passe ?
+
+Cela ajoute une couche de sécurité supplémentaire : même si quelqu'un récupère votre clé privée, il devra connaître le mot de passe pour l'utiliser.
+Si vous laissez le champ vide, la clé sera utilisable sans saisie de mot de passe.
+
 ## Lancer l'agent SSH
-L'agent SSH gère les clés SSH pour faciliter les connexions sécurisées.
+L'agent SSH gère les clés SSH pour faciliter les connexions sécurisées. L'agent SSH permet de mémoriser en mémoire la clé privée et d'éviter de retaper le mot de passe à chaque utilisation.
 
 ```bash
 eval "$(ssh-agent -s)"
