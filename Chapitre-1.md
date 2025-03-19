@@ -7,9 +7,12 @@ Voici les objectifs de ce cours  :
 - [ ] Se familiariser avec les commandes de base
 
 1. [Introduction à Git et installation](#introduction-à-git-et-installation)
-   1. [Vérifier la version de Git](#vérifier-la-version-de-git)
-   2. [Configurer son identité Git](#configurer-son-identité-git)
-   3. [Vérifier la configuration Git](#vérifier-la-configuration-git)
+   1. [Qu'est-ce que Git et comment fonctionne-t-il ?](#quest-ce-que-git-et-comment-fonctionne-t-il-)
+      1. [Les 3 zones principales de Git](#les-3-zones-principales-de-git)
+      2. [🔄 Résumé du workflow Git](#-résumé-du-workflow-git)
+   2. [Vérifier la version de Git](#vérifier-la-version-de-git)
+   3. [Configurer son identité Git](#configurer-son-identité-git)
+   4. [Vérifier la configuration Git](#vérifier-la-configuration-git)
 2. [Initialisation et gestion d'un dépôt](#initialisation-et-gestion-dun-dépôt)
    1. [Initialiser un dépôt Git](#initialiser-un-dépôt-git)
    2. [Ajouter un fichier README.md](#ajouter-un-fichier-readmemd)
@@ -30,6 +33,32 @@ Voici les objectifs de ce cours  :
 
  
 # Introduction à Git et installation
+
+## Qu'est-ce que Git et comment fonctionne-t-il ?
+
+Git est un **système de gestion de versions** utilisé par les développeurs pour suivre les modifications du code, collaborer et gérer différentes versions d'un projet.
+
+### Les 3 zones principales de Git  
+
+![](./img/git%20zone.png)
+
+1. **Working Directory (Dossier de travail)**  
+   - C'est l'endroit où tu modifies et crées des fichiers.  
+   - Les changements ici **ne sont pas encore suivis** par Git.  
+
+2. **Staging Area (Index)**  
+   - Lorsque tu fais `git add`, les fichiers sont ajoutés à cette zone intermédiaire.  
+   - Cela permet de **préparer les fichiers** avant de les valider définitivement.  
+
+3. **Repository Distant (Remote)**  
+   - C'est le serveur où le code est stocké et partagé avec l'équipe (ex: GitHub, GitLab).  
+   - `git push` envoie les commits locaux au repo distant, et `git pull` récupère les mises à jour.  
+
+### 🔄 Résumé du workflow Git  
+
+```plaintext
+📂 Working Directory → (git add) → 📝 Staging Area → (git commit) → 📦 Local Repository → (git push) → 🌍 Remote Repository
+```
 
 ## Vérifier la version de Git
 Avant de commencer, assurez-vous que Git est bien installé en vérifiant sa version.
