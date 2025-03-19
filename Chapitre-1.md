@@ -40,7 +40,7 @@ Git est un **système de gestion de versions** utilisé par les développeurs po
 
 ### Les 3 zones principales de Git  
 
-<img src="./img/git%20zone.png" alt="Git Zone" width="300">
+<img src="./img/git%20zone.png" alt="Git Zone" width="500">
 
 1. **Working Directory (Dossier de travail)**  
    - C'est l'endroit où tu modifies et crées des fichiers.  
