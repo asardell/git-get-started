@@ -64,7 +64,7 @@ Cela ouvre une interface interactive où Git affiche chaque modification par sec
 |n      |Ne pas l'ajouter|
 |s      |Diviser le hunk en morceaux plus petits|
 |q      |Quitter sans ajouter|
-|-------|-----------|
+
 
 Exemple d'utilisation :
 
@@ -151,4 +151,4 @@ git push --force
 |git add -p <fichier>|	Sélectionne les modifications d'un fichier donné|
 |git commit --amend	|Modifie le dernier commit|
 |git commit --amend --no-edit	|Ajoute des fichiers au dernier commit sans modifier son message|
-|git push --force	Force la mise à jour d'un commit déjà poussé (à utiliser avec prudence)|
+|git push --force	|Force la mise à jour d'un commit déjà poussé (à utiliser avec prudence)|
