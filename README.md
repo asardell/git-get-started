@@ -55,7 +55,6 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | `git stash list`      | Liste les éléments sauvegardés en stash      
 | `git rebase -i HEAD~3`          | Rebase interactif sur les 3 derniers commits       |
 | `git rebase -i HEAD~n`          | Rebase interactif sur les `n` derniers commits     |
-|--------------|------------------------------------|
 | `:q!`        | Quitter sans sauvegarder           |
 | `:wq`        | Sauvegarder et quitter             |
 | `git restore nom-fichier`           | Annule les modifications locales d’un fichier (non commitées)              |
