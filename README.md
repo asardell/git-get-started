@@ -38,7 +38,7 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | Commande                                 | Description                                        |
 |------------------------------------------|----------------------------------------------------|
 | `git rebase origin/release/tata`                    | Rebase la branche courante sur `release/tata` (branche distante)           |
-| `git add -p`                                        | Ajoute les changements par blocs interactifs (patchs)                      |
+| `git add --patch`                                        | Ajoute les changements par blocs interactifs (patchs)                      |
 | `git rebase --continue`                             | Continue un rebase après avoir résolu les conflits                         |
 | `git rebase --abort`                                | Annule complètement le rebase en cours                                     |
 | `git push origin toto --force`                      | Pousse la branche `toto` en forçant le push après un rebase                |
@@ -65,3 +65,29 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | `git reset --soft HEAD~1`                 | Annule le dernier commit, conserve les fichiers dans l'index et le working dir |
 | `git reset --mixed HEAD~1`                | Annule le dernier commit, conserve les fichiers modifiés (par défaut)       |
 | `git reset --hard HEAD~1`                 | Supprime le dernier commit **et** les modifications locales (**danger**)    |
+| `git log`                                             | Affiche l’historique des commits pour récupérer les hashes                                       |
+| `git log -3 --oneline`                                | Affiche les 3 derniers commits en résumé                                                          |
+| `git log -n 5 --oneline`                              | Affiche les 5 derniers commits en résumé                                                          |
+| `git reset --soft HEAD~2`                             | Annule les 2 derniers commits en gardant les fichiers et l’index (zone de staging)                |
+| `git reset --hard HEAD~2`                             | Supprime les 2 derniers commits et toutes les modifications locales (**danger**)                  |
+| `git reset --hard HEAD~1`                             | Supprime le dernier commit et les changements locaux (**danger**)                                 |
+| `git revert <hash>`                                   | Crée un commit qui annule le commit spécifié sans réécrire l’historique                           |
+| `git push origin <nom-de-ta-branche> --force`         | Force le push de ta branche locale (utile après un reset ou rebase)                               |
+| `git push --force-with-lease`                         | Force le push mais vérifie qu’il n’y a pas eu d’autres changements distants                       |
+| `git stash`                                           | Met de côté les modifications non commitées (working directory propre)                            |
+| `git stash list`                                      | Liste les changements mis de côté                                                                 |
+| `git stash pop`                                       | Récupère et applique les derniers changements mis en stash                                        |
+| `git restore <file_name>`                             | Annule les modifications locales sur un fichier (working directory)                               |
+| `git fetch --all`                                     | Récupère toutes les branches distantes                                                            |
+| `git fetch --prune`                                   | Supprime les références locales des branches distantes supprimées                                 |
+| `git branch -r`                                       | Liste toutes les branches distantes                                                               |
+| `git pull --rebase origin main`                       | Rebase ta branche locale sur la dernière version de `main` (historique plus propre)               |
+| `git rebase origin/release`                           | Rebase ta branche locale sur `origin/release`                                                     |
+| `git rebase origin/xxx/xxx`                           | Rebase ta branche locale sur une branche distante spécifique                                      |
+| `git rebase -i HEAD~n`                                | Rebase interactif sur les `n` derniers commits pour squasher ou modifier les messages              |
+| `git rebase -i origin/release/xxx-1.5.0`              | Rebase interactif à partir d’une branche distante pour faire du squash                             |
+| `git cherry-pick <hash>`                              | Applique un commit précis d’une autre branche sur ta branche courante                              |
+| `:q!`                                                 | Quitter l’éditeur sans sauvegarder                                                                 |
+| `:wq`                                                 | Sauvegarder et quitter l’éditeur                      
+| `git restore --staged <fichier>`                               | Retire le fichier de la zone de staging, conserve les modifications locales |
+| `git restore --staged <fichier>` + `git restore <fichier>`     | Retire le fichier du staging **et** annule les modifications locales         |
