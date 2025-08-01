@@ -91,3 +91,15 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | `:wq`                                                 | Sauvegarder et quitter l’éditeur                      
 | `git restore --staged <fichier>`                               | Retire le fichier de la zone de staging, conserve les modifications locales |
 | `git restore --staged <fichier>` + `git restore <fichier>`     | Retire le fichier du staging **et** annule les modifications locales         |
+
+
+
+git log origin/A -n 10 --oneline
+git cherry-pick <hash1> <hash2> ... <hash10>
+ou
+git cherry-pick <hash_début>^..<hash_fin>
+git push origin B
+
+
+git reset --hard HEAD~10
+git push origin --force-with-lease
