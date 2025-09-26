@@ -93,13 +93,17 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | `git restore --staged <fichier>` + `git restore <fichier>`     | Retire le fichier du staging **et** annule les modifications locales         |
 
 
-
-git log origin/A -n 10 --oneline
-git cherry-pick <hash1> <hash2> ... <hash10>
-ou
-git cherry-pick <hash_début>^..<hash_fin>
-git push origin B
-
-
-git reset --hard HEAD~10
-git push origin --force-with-lease
+| `git log origin/A -n 10 --oneline` | Affiche les 10 derniers commits de la branche distante `origin/A` en format compact |
+| `git cherry-pick <hash1> <hash2> ... <hash10>` | Applique plusieurs commits spécifiques (listés par leurs hash) sur la branche courante |
+| `git cherry-pick <hash_début>^..<hash_fin>` | Applique une plage de commits (du commit de début au commit de fin inclus) |
+| `git push origin B` | Pousse la branche locale sur la branche `B` du dépôt distant |
+| `git reset --hard HEAD~10` | Supprime les 10 derniers commits de ta branche locale (⚠ irréversible si non sauvegardé ailleurs) |
+| `git push origin --force-with-lease` | Force la mise à jour de la branche distante tout en vérifiant qu’elle n’a pas changé entre-temps |
+| `git branch -a` | Liste toutes les branches locales **et** distantes |
+| `git branch -r` | Liste uniquement les branches distantes |
+| `git tag -a v1.0.0 -m "Release v1.0.0"` | Crée un tag annoté `v1.0.0` avec un message |
+| `git tag` | Liste tous les tags du dépôt |
+| `git show v1.0.0` | Affiche les détails du commit correspondant au tag `v1.0.0` |
+| `git commit --amend -m "Nouveau message"` | Modifie le message du **dernier commit** |
+| `git commit --amend --no-edit` | Met à jour le contenu du dernier commit sans modifier son message |
+| `git push --force-with-lease` | Met à jour la branche distante avec la version corrigée (après un amend) |
