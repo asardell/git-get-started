@@ -22,18 +22,19 @@ Chaque chapitre est présenté dans un fichier `.md` distinct pour faciliter la 
 - Vérification de la connexion  
 
 
-### 3. Travailler avec les commit
-
-- Ajouter tous les fichiers ou une sélection 
-- Modifier un commit
-- Corriger un commit déjà poussé  
+### 3. Commandes utiles
+- Suivre, enregistrer et restaurer des fichiers (`add`, `commit`, `restore`, `reset`).  
+- Explorer l’historique (`log`).  
+- Créer, changer et supprimer des branches.  
+- Travailler avec un dépôt distant (`push`, `pull`, `fetch`).  
+- Résoudre des conflits et utiliser `rebase`.  
+- Mettre du travail de côté et le restaurer (`stash`).  
+- Réécrire l’historique (`commit --amend`, `rebase -i`).  
+- Sélectionner des commits précis (`cherry-pick`).  
+- Gérer des versions avec des tags (`tag`, `show`)
 
 
 ### Commandes en vrac
-
-Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces notions.
-
-# Récapitulatif
 
 | Commande                                 | Description                                        |
 |------------------------------------------|----------------------------------------------------|
@@ -91,8 +92,6 @@ Commande afficher comme aide-mémo le temps de rédiger un chapitre sur ces noti
 | `:wq`                                                 | Sauvegarder et quitter l’éditeur                      
 | `git restore --staged <fichier>`                               | Retire le fichier de la zone de staging, conserve les modifications locales |
 | `git restore --staged <fichier>` + `git restore <fichier>`     | Retire le fichier du staging **et** annule les modifications locales         |
-
-
 | `git log origin/A -n 10 --oneline` | Affiche les 10 derniers commits de la branche distante `origin/A` en format compact |
 | `git cherry-pick <hash1> <hash2> ... <hash10>` | Applique plusieurs commits spécifiques (listés par leurs hash) sur la branche courante |
 | `git cherry-pick <hash_début>^..<hash_fin>` | Applique une plage de commits (du commit de début au commit de fin inclus) |

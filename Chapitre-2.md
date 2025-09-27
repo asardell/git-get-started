@@ -1,33 +1,33 @@
-Travailler avec GitHub
+Chapitre 2 : Travailler avec GitHub
 
 Voici les objectifs de ce cours  :
 - [ ] Associer un dépôt local à un dépôt distant
 - [ ] Se connecter à un dépôt distant
 - [ ] Intéragir avec le dépôt distant
  
-1. [Créer un dépôt local](#créer-un-dépôt-local)
-   1. [Créer un dépôt local pour le projet](#créer-un-dépôt-local-pour-le-projet)
-   2. [Configurer l'utilisateur local](#configurer-lutilisateur-local)
-   3. [Créer un fichier README.md](#créer-un-fichier-readmemd)
-2. [Connexion avec son compte GitHub](#connexion-avec-son-compte-github)
-   1. [Générer une clé SSH](#générer-une-clé-ssh)
-   2. [Nommer le fichier qui stockera les clés](#nommer-le-fichier-qui-stockera-les-clés)
-   3. [Définir un mot de passe pour protéger la clé privée](#définir-un-mot-de-passe-pour-protéger-la-clé-privée)
-   4. [Lancer l'agent SSH](#lancer-lagent-ssh)
-   5. [Ajouter une clé SSH à l'agent](#ajouter-une-clé-ssh-à-lagent)
-   6. [Afficher la clé publique SSH](#afficher-la-clé-publique-ssh)
-   7. [Ajouter la clé SSH](#ajouter-la-clé-ssh)
-   8. [Tester la connexion SSH avec GitHub](#tester-la-connexion-ssh-avec-github)
-3. [Collaborer avec son dépôt distant](#collaborer-avec-son-dépôt-distant)
-   1. [Créer un dépôt distant](#créer-un-dépôt-distant)
-   2. [Ajouter une origine distante](#ajouter-une-origine-distante)
-   3. [Pousser les modifications vers GitHub](#pousser-les-modifications-vers-github)
-   4. [Renommer la branche en "main"](#renommer-la-branche-en-main)
-   5. [Pousser les modifications vers GitHub (encore)](#pousser-les-modifications-vers-github-encore)
-   6. [Vérifiez votre dépôt sur GitHub](#vérifiez-votre-dépôt-sur-github)
-   7. [Afficher les remotes](#afficher-les-remotes)
-   8. [Afficher les informations sur l'origine distante](#afficher-les-informations-sur-lorigine-distante)
-4. [Récapitulatif](#récapitulatif)
+- [Créer un dépôt local](#créer-un-dépôt-local)
+  - [Créer un dépôt local pour le projet](#créer-un-dépôt-local-pour-le-projet)
+  - [Configurer l'utilisateur local](#configurer-lutilisateur-local)
+  - [Créer un fichier README.md](#créer-un-fichier-readmemd)
+- [Connexion avec son compte GitHub](#connexion-avec-son-compte-github)
+  - [Générer une clé SSH](#générer-une-clé-ssh)
+  - [Nommer le fichier qui stockera les clés](#nommer-le-fichier-qui-stockera-les-clés)
+  - [Définir un mot de passe pour protéger la clé privée](#définir-un-mot-de-passe-pour-protéger-la-clé-privée)
+  - [Lancer l'agent SSH](#lancer-lagent-ssh)
+  - [Ajouter une clé SSH à l'agent](#ajouter-une-clé-ssh-à-lagent)
+  - [Afficher la clé publique SSH](#afficher-la-clé-publique-ssh)
+  - [Ajouter la clé SSH](#ajouter-la-clé-ssh)
+  - [Tester la connexion SSH avec GitHub](#tester-la-connexion-ssh-avec-github)
+- [Collaborer avec son dépôt distant](#collaborer-avec-son-dépôt-distant)
+  - [Créer un dépôt distant](#créer-un-dépôt-distant)
+  - [Ajouter une origine distante](#ajouter-une-origine-distante)
+  - [Pousser les modifications vers GitHub](#pousser-les-modifications-vers-github)
+  - [Renommer la branche en "main"](#renommer-la-branche-en-main)
+  - [Pousser les modifications vers GitHub (encore)](#pousser-les-modifications-vers-github-encore)
+  - [Vérifiez votre dépôt sur GitHub](#vérifiez-votre-dépôt-sur-github)
+  - [Afficher les remotes](#afficher-les-remotes)
+  - [Afficher les informations sur l'origine distante](#afficher-les-informations-sur-lorigine-distante)
+- [Récapitulatif](#récapitulatif)
 
 
 # Créer un dépôt local

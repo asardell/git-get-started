@@ -1,154 +1,268 @@
-# Travailler avec les commit
-
-1. [Travailler avec les commit](#travailler-avec-les-commit)
-   1. [1. Utilisation de `git add`](#1-utilisation-de-git-add)
-      1. [1.1 `git add .` : Ajouter tous les fichiers modifiés](#11-git-add---ajouter-tous-les-fichiers-modifiés)
-      2. [1.2 git add -p : Ajouter des parties spécifiques des modifications](#12-git-add--p--ajouter-des-parties-spécifiques-des-modifications)
-      3. [1.3 git add -p  : Sélectionner les modifications d'un seul fichier](#13-git-add--p---sélectionner-les-modifications-dun-seul-fichier)
-   2. [2. Modifier un commit avec git commit --amend](#2-modifier-un-commit-avec-git-commit---amend)
-      1. [2.1 Modifier le message d'un commit](#21-modifier-le-message-dun-commit)
-      2. [2.2 Ajouter un fichier oublié à un commit](#22-ajouter-un-fichier-oublié-à-un-commit)
-      3. [2.3 Modifier un commit déjà poussé (⚠️ avec précaution)](#23-modifier-un-commit-déjà-poussé-️-avec-précaution)
-   3. [Conclusion](#conclusion)
-
-Dans ce chapitre, nous allons voir comment gérer efficacement les ajouts et modifications de fichiers dans Git.  
-
-## 1. Utilisation de `git add`
-
-Avant d'envoyer des modifications à un dépôt distant, il faut les ajouter à la zone de staging. Git propose plusieurs méthodes pour cela.
-
-### 1.1 `git add .` : Ajouter tous les fichiers modifiés
-La commande suivante ajoute **toutes** les modifications présentes dans le projet :  
-
-```bash
-git add .
-```
-
-Exemple d'utilisation :
-
-Modifions un fichier et créons-en un autre :
-
-```bash
-echo "Nouvelle ligne" >> fichier1.txt
-echo "Nouveau fichier" > fichier2.txt
-```
-Vérifions les modifications :
-
-```bash
-git status
-```
-
-Ajoutons toutes les modifications :
-
-```bash
-git add .
-```
-Vérifions que les fichiers sont bien en staging :
-
-```bash
-git status
-```
-
-### 1.2 git add -p : Ajouter des parties spécifiques des modifications
-
-Parfois, on ne veut ajouter qu'une partie des modifications d'un fichier. Pour cela, on utilise la commande patch :
-
-```bash
-git add -p
-```
-Cela ouvre une interface interactive où Git affiche chaque modification par section (hunk) et demande ce que vous voulez en faire :
-
-|Option |Signification|
-|-------|------------------|
-|y  	|Ajouter ce hunk |
-|n      |Ne pas l'ajouter|
-|s      |Diviser le hunk en morceaux plus petits|
-|q      |Quitter sans ajouter|
+Chapitre 3 : Commandes utiles
 
 
-Exemple d'utilisation :
+- [Objectifs](#objectifs)
+- [Gestion de base des fichiers (add, commit, push, restore, reset)](#gestion-de-base-des-fichiers-add-commit-push-restore-reset)
+  - [Commandes concernées](#commandes-concernées)
+  - [Exercices](#exercices)
+- [Branches et navigation](#branches-et-navigation)
+  - [Commandes concernées](#commandes-concernées-1)
+  - [Exercices](#exercices-1)
+- [Stash (mettre de côté du travail temporairement)](#stash-mettre-de-côté-du-travail-temporairement)
+  - [Commandes concernées](#commandes-concernées-2)
+  - [Exercices](#exercices-2)
+- [Historique et logs](#historique-et-logs)
+  - [Commandes concernées](#commandes-concernées-3)
+  - [Exercices](#exercices-3)
+- [Reset et restauration de versions](#reset-et-restauration-de-versions)
+  - [Commandes concernées](#commandes-concernées-4)
+  - [Exercices](#exercices-4)
+- [Rebase et fusion de commits](#rebase-et-fusion-de-commits)
+  - [Commandes concernées](#commandes-concernées-5)
+  - [Exercices](#exercices-5)
+- [Cherry-pick](#cherry-pick)
+  - [Commandes concernées](#commandes-concernées-6)
+  - [Exercices](#exercices-6)
+- [Tags](#tags)
+  - [Commandes concernées](#commandes-concernées-7)
+  - [Exercices](#exercices-7)
+- [Amend et push forcé](#amend-et-push-forcé)
+  - [Commandes concernées](#commandes-concernées-8)
+  - [Exercices](#exercices-8)
+- [Fetch et nettoyage](#fetch-et-nettoyage)
+  - [Commandes concernées](#commandes-concernées-9)
+  - [Exercices](#exercices-9)
+- [Liens utiles](#liens-utiles)
+- [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
 
-Modifions un fichier existant :
 
-```bash
-echo "Première modification" >> fichier1.txt
-echo "Deuxième modification" >> fichier1.txt
-```
-Vérifions les modifications :
+## Objectifs
 
-```bash
-git diff
-```
-Ajoutons les changements interactifs :
+Voici les objectifs de ce module :
+- [ ] Suivre, enregistrer et restaurer des fichiers (`add`, `commit`, `restore`, `reset`).  
+- [ ] Explorer l’historique (`log`).  
+- [ ] Créer, changer et supprimer des branches.  
+- [ ] Travailler avec un dépôt distant (`push`, `pull`, `fetch`).  
+- [ ] Résoudre des conflits et utiliser `rebase`.  
+- [ ] Mettre du travail de côté et le restaurer (`stash`).  
+- [ ] Réécrire l’historique (`commit --amend`, `rebase -i`).  
+- [ ] Sélectionner des commits précis (`cherry-pick`).  
+- [ ] Gérer des versions avec des tags (`tag`, `show`)
 
-```bash
-git add -p
-```
-Sélectionnons seulement la première modification (y pour accepter, n pour refuser la deuxième).
+## Gestion de base des fichiers (add, commit, push, restore, reset)
 
-Vérifions les fichiers en staging :
+### Commandes concernées
+`git add --patch`, `git commit -m "message"`, `git push origin`,  
+`git restore fichier`, `git restore .`, `git restore --staged fichier`,  
+`git reset HEAD fichier`
 
-```bash
-git status
-```
+### Exercices
+1. Crée un fichier `notes.md` et ajoute du contenu.  
+   - Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
+   - Valide avec `git commit -m "Ajout partiel"`.  
 
-### 1.3 git add -p <fichier> : Sélectionner les modifications d'un seul fichier
-Si vous voulez appliquer git add -p sur un fichier spécifique, utilisez :
+2. Modifie `notes.md` à nouveau.  
+   - Lance `git restore notes.md` → observe que les changements sont annulés.  
+   - Re-modifie et ajoute avec `git add .`, puis lance `git restore --staged notes.md`.  
 
-```bash
-git add -p fichier1.txt
-```
-Cela fonctionne de la même manière, mais uniquement sur le fichier ciblé.
+3. Teste `git reset HEAD notes.md` pour retirer un fichier de l’index.  
 
-## 2. Modifier un commit avec git commit --amend
+4. Termine par un `git push origin main`.
 
-Si vous avez fait un commit mais que vous devez le modifier, utilisez git commit --amend.
 
-### 2.1 Modifier le message d'un commit
-Si vous venez de faire un commit et que vous voulez changer son message :
 
-```bash
-git commit --amend
-```
-Cela ouvre un éditeur où vous pouvez modifier le message.
+## Branches et navigation
 
-Exemple :
+### Commandes concernées
+`git checkout -b nom-branche origin/nom-distant`,  
+`git branch -D nom-de-la-branche`, `git push origin --delete nom-de-la-branche`,  
+`git push -u origin nom-de-la-branche`, `git branch -r`, `git branch -a`
 
-```bash
-git commit -m "Premier commit"
-git commit --amend
-```
-Modifiez le message et sauvegardez.
+### Exercices
+1. Crée une nouvelle branche locale depuis `origin/main` :  
+   `git checkout -b feature/test origin/main`  
 
-### 2.2 Ajouter un fichier oublié à un commit
-Si vous avez oublié d'ajouter un fichier dans votre dernier commit :
+2. Ajoute un commit dans cette branche et pousse-la :  
+   `git push -u origin feature/test`  
 
-Ajoutez le fichier :
+3. Liste les branches locales, distantes et toutes :  
+   `git branch`  
+   `git branch -r`  
+   `git branch -a`  
 
-```bash
-git add fichier_oublie.txt
-```
-Amendez le commit :
+4. Supprime la branche localement et sur le distant :  
+   `git branch -D feature/test`  
+   `git push origin --delete feature/test`
 
-```bash
-git commit --amend --no-edit
-```
-L'option --no-edit garde le message de commit existant.
 
-### 2.3 Modifier un commit déjà poussé (⚠️ avec précaution)
-Si le commit a déjà été poussé à un dépôt distant, vous devez forcer le push :
 
-```bash
-git push --force
-```
-⚠️ Attention ! Cela peut causer des problèmes si d'autres personnes ont déjà récupéré ce commit.
+## Stash (mettre de côté du travail temporairement)
 
-## Conclusion
-|Commande	|Description|
------------ |------------|
-|git add .	|Ajoute tous les fichiers modifiés|
-|git add -p	|Ajoute des parties spécifiques des modifications|
-|git add -p <fichier>|	Sélectionne les modifications d'un fichier donné|
-|git commit --amend	|Modifie le dernier commit|
-|git commit --amend --no-edit	|Ajoute des fichiers au dernier commit sans modifier son message|
-|git push --force	|Force la mise à jour d'un commit déjà poussé (à utiliser avec prudence)|
+### Commandes concernées
+`git stash`, `git stash pop`
+
+### Exercices
+1. Modifie un fichier **sans le committer**.  
+2. Lance `git stash` → les changements disparaissent.  
+3. Vérifie l’état avec `git status`.  
+4. Restaure avec `git stash pop`.
+
+
+
+## Historique et logs
+
+### Commandes concernées
+`git log`, `git log -n --oneline`,  
+`git log origin/main -n 10 --oneline`, `git show v1.0.0`
+
+### Exercices
+1. Explore l’historique avec `git log` et navigue avec ↑ / ↓.  
+2. Résume les 5 derniers commits :  
+   `git log -5 --oneline`  
+3. Compare l’historique local et distant :  
+   `git log origin/main -n 10 --oneline`
+
+
+
+## Reset et restauration de versions
+
+### Commandes concernées
+`git reset --soft HEAD~n`, `git reset --mixed HEAD~n`,  
+`git reset --hard HEAD~n`, `git restore --source=HEAD~1 fichier`
+
+### Exercices
+1. Ajoute plusieurs commits rapides (`touch f1.txt`, `f2.txt`, etc.).  
+2. Teste les resets :  
+   - `git reset --soft HEAD~1` : les commits disparaissent mais les modifs restent **staged**.  
+   - `git reset --mixed HEAD~1` : les modifs restent **dans le working directory**.  
+   - `git reset --hard HEAD~1` : ⚠️ tout est supprimé.  
+
+3. Teste `git restore --source=HEAD~1 f1.txt` pour restaurer un fichier d’une version précédente.
+
+
+
+## Rebase et fusion de commits
+
+### Commandes concernées
+`git pull --rebase origin nom-branche`,  
+`git rebase -i HEAD~n`,  
+`git rebase origin/xxx/xxx`,  
+`git rebase -i origin/release/xxx-1.5.0`
+
+### Exercices
+1. Mets-toi sur une branche de test et fais quelques commits.  
+2. Lance `git rebase -i HEAD~3`  
+   - Combine (`squash`) deux commits en un seul.  
+   - Change le message d’un commit.  
+
+3. Mets ta branche à jour avec le remote :  
+   `git pull --rebase origin main`
+
+
+
+## Cherry-pick
+
+### Commandes concernées
+`git cherry-pick <hash>`,  
+`git cherry-pick <hash1> <hash2>`,  
+`git cherry-pick <hash_début>^..<hash_fin>`
+
+### Exercices
+1. Identifie un commit intéressant dans `git log`.  
+2. Récupère-le sur ta branche courante avec `git cherry-pick <hash>`.  
+3. Teste la sélection multiple avec `git cherry-pick <hash1> <hash2>`.  
+4. Teste une plage de commits avec `git cherry-pick <hash_début>^..<hash_fin>`.
+
+
+
+## Tags
+
+### Commandes concernées
+`git tag -a v1.0.0 -m "Release v1.0.0"`, `git tag`,  
+`git show v1.0.0`
+
+### Exercices
+1. Crée un tag annoté `git tag -a v1.0.0 -m "Release v1.0.0"`.  
+2. Liste tous les tags avec `git tag`.  
+3. Inspecte le contenu avec `git show v1.0.0`.
+
+
+
+## Amend et push forcé
+
+### Commandes concernées
+`git commit --amend -m "Nouveau message"`,  
+`git commit --amend --no-edit`,  
+`git push --force-with-lease`
+
+### Exercices
+1. Fais un commit avec un mauvais message.  
+2. Corrige-le avec `git commit --amend -m "Meilleur message"`.  
+3. Ajoute un oubli dans le commit précédent et utilise `git commit --amend --no-edit`.  
+4. Envoie les changements avec `git push --force-with-lease`.
+
+
+
+## Fetch et nettoyage
+
+### Commandes concernées
+`git fetch --all`, `git fetch --prune`
+
+### Exercices
+1. Lance `git fetch --all` pour mettre à jour toutes les branches distantes.  
+2. Supprime une branche distante depuis GitHub, puis lance `git fetch --prune`.  
+   → Vérifie qu’elle disparaît de la liste des branches distantes (`git branch -r`).
+
+
+## Liens utiles
+
+- [Get Started - GitHub](https://docs.github.com/fr/get-started/start-your-journey/hello-world)
+- [Get started - GitHub Desktop](https://docs.github.com/fr/desktop/overview/getting-started-with-github-desktop)
+- [6 Types of Git Branching](https://dev.to/juniourrau/6-types-of-git-branching-strategy-g54)
+
+## Tableau récapitulatif des commandes Git
+
+| Commande | Description |
+|----------|-------------|
+| `git add --patch` | Ajoute sélectivement des parties d’un fichier dans l’index. |
+| `git commit -m "message"` | Valide les changements indexés avec un message. |
+| `git push origin` | Envoie les commits locaux vers le dépôt distant. |
+| `git checkout -b nom-branche origin/nom-distant` | Crée et bascule sur une nouvelle branche locale basée sur une distante. |
+| `git branch -D nom-de-la-branche` | Supprime une branche locale de manière forcée. |
+| `git push origin --delete nom-de-la-branche` | Supprime une branche sur le dépôt distant. |
+| `git push -u origin nom-de-la-branche` | Pousse une nouvelle branche locale et définit le suivi avec le distant. |
+| `git pull --rebase origin nom-de-la-branche` | Récupère les changements distants et les rejoue au-dessus des commits locaux. |
+| `git stash` | Met de côté les modifications non validées. |
+| `git stash pop` | Restaure les modifications précédemment stachées et supprime l’entrée du stash. |
+| `git rebase -i HEAD~n` | Lance un rebase interactif sur les `n` derniers commits. |
+| `git restore nom-fichier` | Restaure un fichier modifié depuis l’index ou HEAD. |
+| `git restore .` | Restaure tous les fichiers modifiés. |
+| `git restore --staged nom-fichier` | Retire un fichier de l’index tout en conservant les modifications. |
+| `git restore --source=HEAD~1 fichier` | Restaure un fichier depuis un commit spécifique (ici le parent du HEAD). |
+| `git reset HEAD nom-fichier` | Retire un fichier de l’index (équivalent à `restore --staged`). |
+| `git reset --soft HEAD~n` | Déplace HEAD en arrière de `n` commits mais conserve les changements en staging. |
+| `git reset --mixed HEAD~n` | Déplace HEAD en arrière et garde les changements dans le working directory. |
+| `git reset --hard HEAD~n` | Déplace HEAD en arrière et supprime toutes les modifications. |
+| `git log` | Affiche l’historique détaillé des commits. |
+| `git log -n --oneline` | Affiche les `n` derniers commits de manière condensée. |
+| `git log origin/A -n 10 --oneline` | Montre les 10 derniers commits de la branche distante `origin/A`. |
+| `git push --force-with-lease` | Force le push mais en s’assurant que personne n’a écrasé les commits distants entre-temps. |
+| `git fetch --all` | Récupère toutes les références du dépôt distant. |
+| `git fetch --prune` | Supprime localement les références de branches distantes supprimées. |
+| `git branch -r` | Liste uniquement les branches distantes. |
+| `git branch -a` | Liste toutes les branches (locales et distantes). |
+| `git pull --rebase origin main` | Met à jour la branche courante depuis `origin/main` avec rebase. |
+| `git rebase origin/xxx/xxx` | Rebase la branche courante sur une branche distante spécifique. |
+| `git rebase -i HEAD~n` | Rebase interactif sur les `n` derniers commits (squash, reword, etc.). |
+| `git rebase -i origin/release/xxx-1.5.0` | Rebase interactif par rapport à une branche de release distante. |
+| `git cherry-pick <hash>` | Applique un commit spécifique dans la branche courante. |
+| `git cherry-pick <hash1> <hash2> ...` | Applique plusieurs commits spécifiques. |
+| `git cherry-pick <hash_début>^..<hash_fin>` | Applique une plage de commits. |
+| `git tag -a v1.0.0 -m "Release v1.0.0"` | Crée un tag annoté avec un message. |
+| `git tag` | Liste les tags existants. |
+| `git show v1.0.0` | Affiche les détails du commit associé au tag. |
+| `git commit --amend -m "Nouveau message"` | Modifie le message du dernier commit. |
+| `git commit --amend --no-edit` | Ajoute des changements au dernier commit sans modifier son message. |
+| `git push --force-with-lease` | Met à jour l’historique distant après rebase ou amend, sans écraser les commits d’autrui. |
+| `:q!` | Quitte l’éditeur sans sauvegarder (dans Vim). |
+| `:wq` | Quitte l’éditeur en sauvegardant (dans Vim). |
