@@ -106,3 +106,14 @@ Chaque chapitre est présenté dans un fichier `.md` distinct pour faciliter la 
 | `git commit --amend -m "Nouveau message"` | Modifie le message du **dernier commit** |
 | `git commit --amend --no-edit` | Met à jour le contenu du dernier commit sans modifier son message |
 | `git push --force-with-lease` | Met à jour la branche distante avec la version corrigée (après un amend) |
+
+
+
+## Liens utiles
+
+- [Stratégie de gestion de branches](https://dev.to/juniourrau/6-types-of-git-branching-strategy-g54)
+- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+- [GitHub Cheat Sheet](https://training.github.com/downloads/fr/github-git-cheat-sheet.pdf)
+- [GitHub Get Started](https://docs.github.com/fr/get-started/quickstart/hello-world)
+- [GitHub Set up](https://docs.github.com/fr/get-started/quickstart/set-up-git)
+- [Initiation à GitHub Desktop](https://docs.github.com/fr/desktop/overview/)
