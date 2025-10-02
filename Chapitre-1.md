@@ -1,4 +1,4 @@
-Les bases de git
+Chapitre 1 : Les bases de git
 
 Voici les objectifs de ce cours  :
 - [ ] Installer git
@@ -6,30 +6,30 @@ Voici les objectifs de ce cours  :
 - [ ] Travailler avec des branches
 - [ ] Se familiariser avec les commandes de base
 
-1. [Introduction à Git et installation](#introduction-à-git-et-installation)
-   1. [Qu'est-ce que Git et comment fonctionne-t-il ?](#quest-ce-que-git-et-comment-fonctionne-t-il-)
-      1. [Les 3 zones principales de Git](#les-3-zones-principales-de-git)
-      2. [🔄 Résumé du workflow Git](#-résumé-du-workflow-git)
-   2. [Vérifier la version de Git](#vérifier-la-version-de-git)
-   3. [Configurer son identité Git](#configurer-son-identité-git)
-   4. [Vérifier la configuration Git](#vérifier-la-configuration-git)
-2. [Initialisation et gestion d'un dépôt](#initialisation-et-gestion-dun-dépôt)
-   1. [Initialiser un dépôt Git](#initialiser-un-dépôt-git)
-   2. [Ajouter un fichier README.md](#ajouter-un-fichier-readmemd)
-   3. [Ajouter un fichier au suivi Git](#ajouter-un-fichier-au-suivi-git)
-   4. [Sauvegarder les modifications avec un commit](#sauvegarder-les-modifications-avec-un-commit)
-   5. [Vérifier l'état du dépôt](#vérifier-létat-du-dépôt)
-3. [Travailler avec des branches](#travailler-avec-des-branches)
-   1. [Vérifier les branches disponibles](#vérifier-les-branches-disponibles)
-   2. [Créer et basculer sur une nouvelle branche](#créer-et-basculer-sur-une-nouvelle-branche)
-   3. [Modifier le fichier README.md](#modifier-le-fichier-readmemd)
-   4. [Vérifier les modifications](#vérifier-les-modifications)
-   5. [Ajouter les modifications au suivi Git](#ajouter-les-modifications-au-suivi-git)
-   6. [Créer un commit pour sauvegarder la modification](#créer-un-commit-pour-sauvegarder-la-modification)
-   7. [Revenir sur la branche principale](#revenir-sur-la-branche-principale)
-   8. [Fusionner la branche dans main](#fusionner-la-branche-dans-main)
-   9. [Supprimer la branche après fusion](#supprimer-la-branche-après-fusion)
-4. [Récapitulatif](#récapitulatif)
+- [Introduction à Git et installation](#introduction-à-git-et-installation)
+  - [Qu'est-ce que Git et comment fonctionne-t-il ?](#quest-ce-que-git-et-comment-fonctionne-t-il-)
+    - [Les 3 zones principales de Git](#les-3-zones-principales-de-git)
+    - [🔄 Résumé du workflow Git](#-résumé-du-workflow-git)
+  - [Vérifier la version de Git](#vérifier-la-version-de-git)
+  - [Configurer son identité Git](#configurer-son-identité-git)
+  - [Vérifier la configuration Git](#vérifier-la-configuration-git)
+- [Initialisation et gestion d'un dépôt](#initialisation-et-gestion-dun-dépôt)
+  - [Initialiser un dépôt Git](#initialiser-un-dépôt-git)
+  - [Ajouter un fichier README.md](#ajouter-un-fichier-readmemd)
+  - [Ajouter un fichier au suivi Git](#ajouter-un-fichier-au-suivi-git)
+  - [Sauvegarder les modifications avec un commit](#sauvegarder-les-modifications-avec-un-commit)
+  - [Vérifier l'état du dépôt](#vérifier-létat-du-dépôt)
+- [Travailler avec des branches](#travailler-avec-des-branches)
+  - [Vérifier les branches disponibles](#vérifier-les-branches-disponibles)
+  - [Créer et basculer sur une nouvelle branche](#créer-et-basculer-sur-une-nouvelle-branche)
+  - [Modifier le fichier README.md](#modifier-le-fichier-readmemd)
+  - [Vérifier les modifications](#vérifier-les-modifications)
+  - [Ajouter les modifications au suivi Git](#ajouter-les-modifications-au-suivi-git)
+  - [Créer un commit pour sauvegarder la modification](#créer-un-commit-pour-sauvegarder-la-modification)
+  - [Revenir sur la branche principale](#revenir-sur-la-branche-principale)
+  - [Fusionner la branche dans main](#fusionner-la-branche-dans-main)
+  - [Supprimer la branche après fusion](#supprimer-la-branche-après-fusion)
+- [Récapitulatif](#récapitulatif)
 
  
 # Introduction à Git et installation
