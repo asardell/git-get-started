@@ -60,7 +60,37 @@ Voici les objectifs de ce module :
 1. Crée un fichier `notes.md` et ajoute du contenu avant de le commit et push. 
    - Fais un `git add notes.md` pour ajouter ce fichier en staging
    - Fais un `git commit -m "ton message` et `git push`
-   - Modifie le fichier `notes.md` avec plusieurs lignes. 
+   - Modifie le fichier `notes.md` avec plusieurs lignes : 
+
+```bash
+echo "# Recettes de Desserts" > notes.md
+echo "## Tiramisu" >> notes.md
+echo "### Ingrédients:" >> notes.md
+echo "- 250g de mascarpone" >> notes.md
+echo "- 3 œufs" >> notes.md
+echo "- 100g de sucre" >> notes.md
+echo "- 1 paquet de biscuits à la cuillère" >> notes.md
+echo "- 300ml de café fort" >> notes.md
+echo "- Cacao en poudre" >> notes.md
+echo "### Préparation:" >> notes.md
+echo "1. Séparer les blancs des jaunes d'œufs et monter les blancs en neige." >> notes.md
+echo "2. Mélanger les jaunes avec le sucre, puis ajouter le mascarpone." >> notes.md
+echo "3. Tremper les biscuits dans le café et les disposer dans un plat." >> notes.md
+echo "4. Ajouter la préparation avec les jaunes d'œufs, puis répéter l'opération." >> notes.md
+echo "5. Saupoudrer de cacao et laisser reposer au réfrigérateur pendant 4 heures." >> notes.md
+echo "## Brownie" >> notes.md
+echo "### Ingrédients:" >> notes.md
+echo "- 200g de chocolat noir" >> notes.md
+echo "- 150g de beurre" >> notes.md
+echo "- 200g de sucre" >> notes.md
+echo "- 3 œufs" >> notes.md
+echo "- 100g de farine" >> notes.md
+echo "### Préparation:" >> notes.md
+echo "1. Faire fondre le chocolat et le beurre." >> notes.md
+echo "2. Ajouter le sucre et les œufs, puis mélanger." >> notes.md
+echo "3. Incorporer la farine." >> notes.md
+echo "4. Verser dans un moule beurré et cuire à 180°C pendant 20 à 25 minutes." >> notes.md
+```
    - Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
    - Valide avec `git commit -m "Ajout partiel"`. 
 2. Modifie `notes.md` à nouveau.  
