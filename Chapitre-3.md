@@ -57,10 +57,12 @@ Voici les objectifs de ce module :
 `git reset HEAD fichier`
 
 ### Exercices
-1. Crée un fichier `notes.md` et ajoute du contenu.  
+1. Crée un fichier `notes.md` et ajoute du contenu avant de le commit et push. 
+   - Fais un `git add notes.md` pour ajouter ce fichier en staging
+   - Fais un `git commit -m "ton message` et `git push`
+   - Modifie le fichier `notes.md` avec plusieurs lignes. 
    - Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
-   - Valide avec `git commit -m "Ajout partiel"`.  
-
+   - Valide avec `git commit -m "Ajout partiel"`. 
 2. Modifie `notes.md` à nouveau.  
    - Lance `git restore notes.md` → observe que les changements sont annulés.  
    - Re-modifie et ajoute avec `git add .`, puis lance `git restore --staged notes.md`.  
