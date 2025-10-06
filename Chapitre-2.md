@@ -74,6 +74,18 @@ Explication des éléments :
 
 # Connexion avec son compte GitHub
 
+## Ou créer la clé SSH
+
+![](img/warning.gif)
+
+Il est recommandé de créer la clé SSH en dehors du repository git car elle peut servir pour plusieurs projet dans le même compte utilisateur github. 
+
+Utilisez cette commande pour vous recentrer sur le dossier parent : 
+
+```bash
+cd ..
+```
+
 ## Générer une clé SSH
 Cette commande génère une clé SSH pour sécuriser les connexions avec les serveurs Git.
 
@@ -86,9 +98,8 @@ Explication des éléments :
 - `-b 4096` : Définit la longueur de la clé à 4096 bits.
 - `-C` : Ajoute un commentaire, ici l'email, pour identifier la clé.
 
-
 ## Nommer le fichier qui stockera les clés
-Lors de la génération de la clé SSH, on vous demande où enregistrer le fichier contenant la clé privée et la clé publique.
+Lors de la génération de la clé SSH, on vous demande comment nommer le fichier contenant la clé privée et la clé publique.
 
 ```bash
 Enter file in which to save the key (/c/Users/xxx/.ssh/id_rsa): toto
@@ -99,17 +110,7 @@ Cela crée deux fichiers :
 
 `toto ` : La clé privée (NE JAMAIS PARTAGER !)
 `toto.pub` : La clé publique (à partager sur GitHub ou d'autres serveurs pour s'authentifier)
-Par défaut, si vous ne spécifiez pas de nom, les clés sont enregistrées dans `~/.ssh/id_rsa` (clé privée) et `~/.ssh/id_rsa.pub` (clé publique).
-
-Où est-elle enregistrée ?
-Si vous ne précisez que le nom du fichier, la clé sera créée dans le dossier en cours dans la session Bash. 
-C'est ce qu'on appelle le répertoire actif (ou Active Directory dans Git Bash).
-
-Pour voir dans quel dossier vous êtes :
-
-```bash
-pwd
-```
+Par défaut, si vous ne spécifiez pas de nom, les clés sont enregistrées dans `votre_chemin/id_rsa` (clé privée) et `votre_chemin/id_rsa.pub` (clé publique).
 
 ## Définir un mot de passe pour protéger la clé privée
 Après avoir choisi un nom de fichier, le terminal vous demande de saisir un passphrase (mot de passe) :
@@ -123,6 +124,16 @@ Pourquoi mettre un mot de passe ?
 
 Cela ajoute une couche de sécurité supplémentaire : même si quelqu'un récupère votre clé privée, il devra connaître le mot de passe pour l'utiliser.
 Si vous laissez le champ vide, la clé sera utilisable sans saisie de mot de passe.
+
+Où est-elle enregistrée ?
+Si vous ne précisez que le nom du fichier, la clé sera créée dans le dossier en cours dans la session Bash. 
+C'est ce qu'on appelle le répertoire actif (ou Active Directory dans Git Bash).
+
+Pour voir dans quel dossier vous êtes :
+
+```bash
+pwd
+```
 
 ## Lancer l'agent SSH
 L'agent SSH gère les clés SSH pour faciliter les connexions sécurisées. L'agent SSH permet de mémoriser en mémoire la clé privée et d'éviter de retaper le mot de passe à chaque utilisation.
@@ -138,21 +149,21 @@ Explication des éléments :
 Cette commande ajoute la clé SSH générée à l'agent pour une utilisation automatique.
 
 ```bash
-ssh-add ~/.ssh/toto
+ssh-add votre_chemin/toto
 ```
 Explication des éléments :
 - `ssh-add` : Ajoute une clé privée SSH à l'agent.
-- `~/.ssh/toto` : Chemin du fichier contenant la clé privée à ajouter.
+- `votre_chemin/toto` : Chemin du fichier contenant la clé privée à ajouter.
 
 ## Afficher la clé publique SSH
 Cela permet de récupérer la clé publique générée afin de l'ajouter à des services comme GitHub.
 
 ```bash
-cat ~/.ssh/toto.pub
+cat votre_chemin/toto.pub
 ```
 Explication des éléments :
 - `cat` : Affiche le contenu d'un fichier.
-- `~/.ssh/toto.pub` : Chemin du fichier de la clé publique.
+- `votre_chemin/toto.pub` : Chemin du fichier de la clé publique.
 
 ## Ajouter la clé SSH
 
@@ -184,22 +195,66 @@ Explication des éléments :
 
 1. Connectez-vous à GitHub.
 2. Cliquez sur le bouton New Repository (Nouveau dépôt).
-3. Donnez un nom au dépôt (par exemple, mon-projet).
+3. Donnez un nom au dépôt (par exemple, `mon-projet2`).
 4. Ne cochez aucune option (pas de README, .gitignore ou licence) pour un dépôt vierge.
 5. Cliquez sur Create Repository.
 
-## Ajouter une origine distante
+## Créer le repos local et le lier au repos distant
+
+1. Créer un nouveau projet en local nommé `mon-projet2` manuellement ou avec le terminal
+
+```bash
+mkdir mon-projet2
+```
+
+2. Se replacer sur le dossier projet
+
+```bash
+cd ./mon-projet2
+```
+
+3. Créer un fichier README
+
+```bash
+echo "# test" >> README.md
+```
+
+4. Initialiser le dossier avec Git
+
+```bash
+git init
+```
+
+1. Renommer la branche par défaut en `main` si la branche actuelle est `master`
+Cette commande renomme la branche actuelle en "main" pour suivre les conventions modernes.
+
+```bash
+git branch -M main
+```
+Explication des éléments :
+- `git branch` : Commande pour travailler avec les branches.
+- `-M` : Renomme la branche actuelle en "main".
+
+6. Ajouter le fichier README dans la zone de staging et préparer le commit
+   
+```bash
+git add README.md
+git commit -m "first commit"
+```
+
+7. Lier votre repos local avec le repos distant
+
 L'origine distante spécifie l'URL d'un dépôt Git distant, comme celui sur GitHub.
 
 ```bash
-git remote add origin git@github.com:<utilisateur>/mon-projet.git
+git remote add origin git@github.com:{utilisateur}/mon-projet2.git
 ```
 Explication des éléments :
 - `git remote add` : Ajoute un dépôt distant à votre dépôt local.
 - `origin` : Nom donné à l'origine distante (standard).
 - `git@github.com:<utilisateur>/mon-projet.git` : URL du dépôt distant, avec le nom d'utilisateur GitHub et le nom du projet.
 
-## Pousser les modifications vers GitHub
+8.  Pousser les modifications vers GitHub
 On envoie les modifications locales vers le dépôt distant sur GitHub.
 
 ```bash
@@ -211,29 +266,10 @@ Explication des éléments :
 - `origin` : Nom du dépôt distant.
 - `main` : Branche à pousser.
 
-
-## Renommer la branche en "main"
-Cette commande renomme la branche actuelle en "main" pour suivre les conventions modernes.
-
-```bash
-git branch -M main
-```
-Explication des éléments :
-- `git branch` : Commande pour travailler avec les branches.
-- `-M` : Renomme la branche actuelle en "main".
-
-## Pousser les modifications vers GitHub (encore)
-Répéter le push de la branche "main" vers le dépôt distant après le renommage.
-
-```bash
-git push -u origin main
-```
-
-## Vérifiez votre dépôt sur GitHub
+9.  Vérifiez votre dépôt sur GitHub
 Rendez-vous sur l'URL du dépôt GitHub (https://github.com/<votre-utilisateur>/mon-projet.git) pour voir les fichiers poussés.
 
-
-## Afficher les remotes
+10. Afficher les remotes
 Cela permet de lister les remotes associées au dépôt, notamment l'origine distante.
 
 ```bash
@@ -243,7 +279,7 @@ Explication des éléments :
 - `git remote` : Commande pour gérer les dépôts distants.
 - `-v` : Affiche les URL de chaque dépôt distant configuré.
 
-## Afficher les informations sur l'origine distante
+11. Afficher les informations sur l'origine distante
 Affiche les détails de l'origine distante, y compris les URL pour fetcher et pousser.
 
 ```bash
