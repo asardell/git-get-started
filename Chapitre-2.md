@@ -8,8 +8,8 @@ Voici les objectifs de ce cours  :
 - [Créer un dépôt local](#créer-un-dépôt-local)
   - [Créer un dépôt local pour le projet](#créer-un-dépôt-local-pour-le-projet)
   - [Configurer l'utilisateur local](#configurer-lutilisateur-local)
-  - [Créer un fichier README.md](#créer-un-fichier-readmemd)
 - [Connexion avec son compte GitHub](#connexion-avec-son-compte-github)
+  - [Ou créer la clé SSH](#ou-créer-la-clé-ssh)
   - [Générer une clé SSH](#générer-une-clé-ssh)
   - [Nommer le fichier qui stockera les clés](#nommer-le-fichier-qui-stockera-les-clés)
   - [Définir un mot de passe pour protéger la clé privée](#définir-un-mot-de-passe-pour-protéger-la-clé-privée)
@@ -20,13 +20,17 @@ Voici les objectifs de ce cours  :
   - [Tester la connexion SSH avec GitHub](#tester-la-connexion-ssh-avec-github)
 - [Collaborer avec son dépôt distant](#collaborer-avec-son-dépôt-distant)
   - [Créer un dépôt distant](#créer-un-dépôt-distant)
-  - [Ajouter une origine distante](#ajouter-une-origine-distante)
-  - [Pousser les modifications vers GitHub](#pousser-les-modifications-vers-github)
-  - [Renommer la branche en "main"](#renommer-la-branche-en-main)
-  - [Pousser les modifications vers GitHub (encore)](#pousser-les-modifications-vers-github-encore)
-  - [Vérifiez votre dépôt sur GitHub](#vérifiez-votre-dépôt-sur-github)
-  - [Afficher les remotes](#afficher-les-remotes)
-  - [Afficher les informations sur l'origine distante](#afficher-les-informations-sur-lorigine-distante)
+  - [Lier son repos local au repos distant](#lier-son-repos-local-au-repos-distant)
+    - [Se replacer sur le dossier projet](#se-replacer-sur-le-dossier-projet)
+    - [Créer un fichier README](#créer-un-fichier-readme)
+    - [Créer un fichier README.md](#créer-un-fichier-readmemd)
+    - [Renommer la branche par défaut](#renommer-la-branche-par-défaut)
+    - [Ajouter le fichier README dans la zone de staging et préparer le commit](#ajouter-le-fichier-readme-dans-la-zone-de-staging-et-préparer-le-commit)
+    - [Lier votre repos local avec le repos distant](#lier-votre-repos-local-avec-le-repos-distant)
+    - [Pousser les modifications vers GitHub](#pousser-les-modifications-vers-github)
+    - [Vérifiez votre dépôt sur GitHub](#vérifiez-votre-dépôt-sur-github)
+    - [Afficher les remotes](#afficher-les-remotes)
+    - [Afficher les informations sur l'origine distante](#afficher-les-informations-sur-lorigine-distante)
 - [Récapitulatif](#récapitulatif)
 
 
@@ -36,12 +40,13 @@ Voici les objectifs de ce cours  :
 Un dossier de projet est nécessaire pour initialiser un dépôt Git.
 
 ```bash
-mkdir mon-projet
-cd mon-projet
+cd ..
+mkdir mon-projet2
+cd mon-projet2
 git init
 ```
 Explication des éléments :- mkdir : Commande qui crée un répertoire.
-- `mon-projet` : Nom du répertoire que l'on souhaite créer.
+- `mon-projet2` : Nom du répertoire que l'on souhaite créer.
 - `cd` : Change le répertoire de travail vers celui spécifié.
 - `git init` : Crée un nouveau dépôt Git dans le répertoire courant.
 
@@ -55,22 +60,6 @@ git config --local user.email "VotreEmail"
 ```
 Explication des éléments :- git config : Modifie la configuration Git.
 - `--local` : Applique cette configuration uniquement au dépôt courant.
-
-## Créer un fichier README.md
-Le fichier README.md sert à fournir des informations importantes sur le projet. Ici, on y ajoute un titre.
-
-```bash
-echo "# Mon Projet" > README.md
-git add README.md
-git commit -m "Initial commit: Add README.md"
-```
-Explication des éléments :
-- `echo` : Affiche ou écrit une chaîne de caractères.
-- `>` : Redirige la sortie vers un fichier, créant ou écrasant ce dernier.
-- `README.md` : Le fichier cible dans lequel on insère le texte.
-- `git add` : Ajoute des fichiers à la zone de staging.
-- `git commit` : Enregistre les modifications dans l'historique de Git.
-- `-m` : Permet d’ajouter un message de commit.
 
 # Connexion avec son compte GitHub
 
@@ -199,33 +188,28 @@ Explication des éléments :
 4. Ne cochez aucune option (pas de README, .gitignore ou licence) pour un dépôt vierge.
 5. Cliquez sur Create Repository.
 
-## Créer le repos local et le lier au repos distant
+## Lier son repos local au repos distant
 
-1. Créer un nouveau projet en local nommé `mon-projet2` manuellement ou avec le terminal
-
-```bash
-mkdir mon-projet2
-```
-
-2. Se replacer sur le dossier projet
+### Se replacer sur le dossier projet
 
 ```bash
 cd ./mon-projet2
 ```
 
-3. Créer un fichier README
+### Créer un fichier README.md
+Le fichier README.md sert à fournir des informations importantes sur le projet. Ici, on y ajoute un titre.
 
 ```bash
-echo "# test" >> README.md
+echo "# Mon Projet" > README.md
 ```
 
-4. Initialiser le dossier avec Git
+Explication des éléments :
+- `echo` : Affiche ou écrit une chaîne de caractères.
+- `>` : Redirige la sortie vers un fichier, créant ou écrasant ce dernier.
+- `README.md` : Le fichier cible dans lequel on insère le texte.
 
-```bash
-git init
-```
-
-1. Renommer la branche par défaut en `main` si la branche actuelle est `master`
+### Renommer la branche par défaut
+Renommer la branche par défaut en `main` si la branche actuelle est `master`
 Cette commande renomme la branche actuelle en "main" pour suivre les conventions modernes.
 
 ```bash
@@ -235,14 +219,19 @@ Explication des éléments :
 - `git branch` : Commande pour travailler avec les branches.
 - `-M` : Renomme la branche actuelle en "main".
 
-6. Ajouter le fichier README dans la zone de staging et préparer le commit
+### Ajouter le fichier README dans la zone de staging et préparer le commit
    
 ```bash
 git add README.md
 git commit -m "first commit"
 ```
 
-7. Lier votre repos local avec le repos distant
+Explication des éléments :
+- `git add` : Ajoute des fichiers à la zone de staging.
+- `git commit` : Enregistre les modifications dans l'historique de Git.
+- `-m` : Permet d’ajouter un message de commit.
+
+### Lier votre repos local avec le repos distant
 
 L'origine distante spécifie l'URL d'un dépôt Git distant, comme celui sur GitHub.
 
@@ -254,7 +243,7 @@ Explication des éléments :
 - `origin` : Nom donné à l'origine distante (standard).
 - `git@github.com:<utilisateur>/mon-projet.git` : URL du dépôt distant, avec le nom d'utilisateur GitHub et le nom du projet.
 
-8.  Pousser les modifications vers GitHub
+### Pousser les modifications vers GitHub
 On envoie les modifications locales vers le dépôt distant sur GitHub.
 
 ```bash
@@ -266,10 +255,10 @@ Explication des éléments :
 - `origin` : Nom du dépôt distant.
 - `main` : Branche à pousser.
 
-9.  Vérifiez votre dépôt sur GitHub
+### Vérifiez votre dépôt sur GitHub
 Rendez-vous sur l'URL du dépôt GitHub (https://github.com/<votre-utilisateur>/mon-projet.git) pour voir les fichiers poussés.
 
-10. Afficher les remotes
+### Afficher les remotes
 Cela permet de lister les remotes associées au dépôt, notamment l'origine distante.
 
 ```bash
@@ -279,7 +268,7 @@ Explication des éléments :
 - `git remote` : Commande pour gérer les dépôts distants.
 - `-v` : Affiche les URL de chaque dépôt distant configuré.
 
-11. Afficher les informations sur l'origine distante
+### Afficher les informations sur l'origine distante
 Affiche les détails de l'origine distante, y compris les URL pour fetcher et pousser.
 
 ```bash
