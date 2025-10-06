@@ -103,6 +103,10 @@ nano README.md
 
 Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
 
+```bash
+git add --patch README.md
+```
+
 | Touche | Signification | Description / Exemple d’usage |
 |:-------|:---------------|:------------------------------|
 | **y** | Yes | Ajouter ce hunk au staging area (sera inclus dans le prochain commit). |
