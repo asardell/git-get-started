@@ -57,51 +57,77 @@ Voici les objectifs de ce module :
 `git reset HEAD fichier`
 
 ### Exercices
-1. Crée un fichier `notes.md` et ajoute du contenu avant de le commit et push. 
-   - Fais un `git add notes.md` pour ajouter ce fichier en staging
-   - Fais un `git commit -m "ton message` et `git push`
-   - Modifie le fichier `notes.md` avec plusieurs lignes : 
+1. Modifier le fichier `README.md` et ajoute du contenu avant de le commit et push. 
 
 ```bash
-echo "# Recettes de Desserts" > notes.md
-echo "## Tiramisu" >> notes.md
-echo "### Ingrédients:" >> notes.md
-echo "- 250g de mascarpone" >> notes.md
-echo "- 3 œufs" >> notes.md
-echo "- 100g de sucre" >> notes.md
-echo "- 1 paquet de biscuits à la cuillère" >> notes.md
-echo "- 300ml de café fort" >> notes.md
-echo "- Cacao en poudre" >> notes.md
-echo "### Préparation:" >> notes.md
-echo "1. Séparer les blancs des jaunes d'œufs et monter les blancs en neige." >> notes.md
-echo "2. Mélanger les jaunes avec le sucre, puis ajouter le mascarpone." >> notes.md
-echo "3. Tremper les biscuits dans le café et les disposer dans un plat." >> notes.md
-echo "4. Ajouter la préparation avec les jaunes d'œufs, puis répéter l'opération." >> notes.md
-echo "5. Saupoudrer de cacao et laisser reposer au réfrigérateur pendant 4 heures." >> notes.md
-echo "## Brownie" >> notes.md
-echo "### Ingrédients:" >> notes.md
-echo "- 200g de chocolat noir" >> notes.md
-echo "- 150g de beurre" >> notes.md
-echo "- 200g de sucre" >> notes.md
-echo "- 3 œufs" >> notes.md
-echo "- 100g de farine" >> notes.md
-echo "### Préparation:" >> notes.md
-echo "1. Faire fondre le chocolat et le beurre." >> notes.md
-echo "2. Ajouter le sucre et les œufs, puis mélanger." >> notes.md
-echo "3. Incorporer la farine." >> notes.md
-echo "4. Verser dans un moule beurré et cuire à 180°C pendant 20 à 25 minutes." >> notes.md
+echo "# Recettes de Desserts" > README.md
+echo "## Tiramisu" >> README.md
+echo "### Ingrédients:" >> README.md
+echo "- 250g de mascarpone" >> README.md
+echo "- 3 œufs" >> README.md
+echo "- 100g de sucre" >> README.md
+echo "- 1 paquet de biscuits à la cuillère" >> README.md
+echo "- 300ml de café fort" >> README.md
+echo "- Cacao en poudre" >> README.md
+echo "### Préparation:" >> README.md
+echo "1. Séparer les blancs des jaunes d'œufs et monter les blancs en neige." >> README.md
+echo "2. Mélanger les jaunes avec le sucre, puis ajouter le mascarpone." >> README.md
+echo "3. Tremper les biscuits dans le café et les disposer dans un plat." >> README.md
+echo "4. Ajouter la préparation avec les jaunes d'œufs, puis répéter l'opération." >> README.md
+echo "5. Saupoudrer de cacao et laisser reposer au réfrigérateur pendant 4 heures." >> README.md
+echo "## Brownie" >> README.md
+echo "### Ingrédients:" >> README.md
+echo "- 200g de chocolat noir" >> README.md
+echo "- 150g de beurre" >> README.md
+echo "- 200g de sucre" >> README.md
+echo "- 3 œufs" >> README.md
+echo "- 100g de farine" >> README.md
+echo "### Préparation:" >> README.md
+echo "1. Faire fondre le chocolat et le beurre." >> README.md
+echo "2. Ajouter le sucre et les œufs, puis mélanger." >> README.md
+echo "3. Incorporer la farine." >> README.md
+echo "4. Verser dans un moule beurré et cuire à 180°C pendant 20 à 25 minutes." >> README.md
 ```
-   - Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
-   - Valide avec `git commit -m "Ajout partiel"`. 
-2. Modifie `notes.md` à nouveau.  
-   - Lance `git restore notes.md` → observe que les changements sont annulés.  
-   - Re-modifie et ajoute avec `git add .`, puis lance `git restore --staged notes.md`.  
 
-3. Teste `git reset HEAD notes.md` pour retirer un fichier de l’index.  
+On peut aussi modifier un fichier directement dans le terminal avec la commande `nano`
 
-4. Termine par un `git push origin main`.
+```bash
+nano README.md
+```
 
+- Ctrl + O pour enregistrer
+- Entrée → pour confirmer le nom du fichier
+- Ctrl + X → pour quitter nano
 
+2. Ajouter uniquement certains modification en staging
+
+Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
+
+| Touche | Signification | Description / Exemple d’usage |
+|:-------|:---------------|:------------------------------|
+| **y** | Yes | Ajouter ce hunk au staging area (sera inclus dans le prochain commit). |
+| **n** | No | Ignorer ce hunk (ne pas l’ajouter pour l’instant). |
+| **q** | Quit | Quitter `git add --patch` immédiatement, sans traiter les hunks suivants. |
+| **a** | All | Ajouter **tous** les hunks restants du fichier. |
+| **d** | Done (ou skip remaining) | Ne pas ajouter **aucun** des hunks restants. |
+| **s** | Split | Diviser le hunk en sous-parties plus petites (si possible) pour choisir plus finement les lignes à ajouter. |
+| **e** | Edit | Éditer manuellement le contenu du hunk avant de le valider (ligne par ligne). |
+| **?** | Help | Afficher l’aide et la signification des options disponibles. |
+
+3. Teste `git reset HEAD README.md` pour retirer un fichier du staging.  
+
+```bash
+git reset HEAD README.md
+```
+
+4. Ajouter à nouveau le fichier `README.md` en staging puis utilise la commande `restore`.  
+   
+```bash
+git add README.md
+git restore --staged README.md
+```
+
+5. Termine par un `git push origin main`.
 
 ## Branches et navigation
 
