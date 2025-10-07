@@ -288,12 +288,12 @@ Dans cette partie, nous allons concidérer que nous avons cette méthodologie de
 1. Executer ces commandes pour que le repos ressemble à la méthodologie de gestion de branche ci-dessus : 
 
 ```bash
-# --- S'assurer d'être à jour avec origin/main ---
-git checkout main
+# --- S'assurer d'être à jour avec origin/develop ---
+git checkout develop
 git pull origin
 
-# Branche feature/toto from origin/main
-git checkout -b feature/toto origin/main
+# Branche feature/toto from origin/develop
+git checkout -b feature/toto origin/develop
 
 # Créer et pousser un fichier pour feature/toto
 echo "# Fichier feature/toto" > toto.md
@@ -302,8 +302,8 @@ git add toto.md
 git commit -m "Ajout du fichier toto.md sur feature/toto"
 git push -u origin feature/toto
 
-# Branche feature/tata from origin/main
-git checkout -b feature/tata origin/main
+# Branche feature/tata from origin/develop
+git checkout -b feature/tata origin/develop
 
 # Créer et pousser un fichier pour feature/tata
 echo "# Fichier feature/tata" > tata.md
@@ -313,10 +313,13 @@ git commit -m "Ajout du fichier tata.md sur feature/tata"
 git push -u origin feature/tata
 ```
 
-2. 
-
-
-
+2. MR toto dans develop
+3. Rebase tata from develop
+4. MR tata dans develop
+5. Squash des 2 derniers commit de develop
+6. MR de develop sur main
+7. Tag de main V1.1.0
+8. Nettoyage branche local avec prune
 
 
 
