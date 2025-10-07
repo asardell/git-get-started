@@ -51,13 +51,49 @@ Voici les objectifs de ce module :
 
 ## Gestion de base des fichiers (add, commit, push, restore, reset)
 
+Dans cette partie, nous allons concidérer que nous avons cette méthodologie de gestion de branche.
+
+<p align="center">
+  <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffbrbhaga1k2218xj77bj.png" alt="Source de l'image" width="600"/>
+</p>
+
 ### Commandes concernées
-`git add --patch`, `git commit -m "message"`, `git push origin`,  
-`git restore fichier`, `git restore .`, `git restore --staged fichier`,  
-`git reset HEAD fichier`
+
+`git fetch`, `git checkout`, `git add --patch`, `git push origin`, `git restore `, `git log`.
 
 ### Exercices
-1. Modifier le fichier `README.md` et ajoute du contenu avant de le commit et push. 
+
+1. Actualiser le repos local à partir du repos distant :
+
+```bash
+git fetch --all
+```
+
+- `git fetch` : récupère les commits, branches et tags distants sans les appliquer à ta branche locale.
+
+- `--all` : applique cette opération à toutes les branches.
+
+2. Créer une nouvelle branche locale depuis `origin/main` :  
+
+```bash
+git checkout -b develop origin/main
+```
+
+Le `-b` dans la commande `git checkout -b` veut dire *branch* → c’est l’option qui indique à Git de créer une nouvelle branche avant de s’y positionner.
+
+3. Cette branche n'existe pas encore sur le repos distant, cette commane permet de la créer aussi sur le repos distant sans faire de commit :  
+
+```bash
+git push -u origin develop
+```
+
+- `git push` : Envoie les commits de la branche locale vers un dépôt distant
+- `origin` : Le nom du *remote* (le dépôt distant appelé par défaut *origin*)
+- `develop` :Le nom de la branche locale qu'on veut pousser
+- `-u`  : Configure la liaison (tracking) entre la branche locale et la branche distante
+
+
+4. Dans la branche `develop`, modifier le fichier `README.md` et ajoute du contenu avant de le commit et push. 
 
 ```bash
 echo "# Recettes de Desserts" > README.md
@@ -99,7 +135,7 @@ nano README.md
 - Entrée → pour confirmer le nom du fichier
 - Ctrl + X → pour quitter nano
 
-2. Ajouter uniquement certains modification en staging
+5. Ajouter uniquement certains modification en staging
 
 Fais un `git add --patch` → choisis de **stager seulement une partie** des changements.  
 
@@ -118,20 +154,69 @@ git add --patch README.md
 | **e** | Edit | Éditer manuellement le contenu du hunk avant de le valider (ligne par ligne). |
 | **?** | Help | Afficher l’aide et la signification des options disponibles. |
 
-3. Teste `git reset HEAD README.md` pour retirer un fichier du staging.  
+6. Retirer un fichier du staging.  
 
 ```bash
-git reset HEAD README.md
-```
-
-4. Ajouter à nouveau le fichier `README.md` en staging puis utilise la commande `restore`.  
-   
-```bash
-git add README.md
 git restore --staged README.md
 ```
 
-5. Termine par un `git push origin main`.
+Enlève le fichier `README.md` du staging area, mais ne touche pas à son contenu dans le répertoire de travail.
+
+7. Ajouter à nouveau le fichier `README.md` en staging puis utiliser la commande `restore`.  
+   
+```bash
+git add README.md
+git restore README.md
+```
+
+Récap : 
+
+| Commande | Effet | Efface les changements ? |
+|----------|-------|--------------------------|
+| `git restore --staged <fichier>` | Retire du staging seulement et équivalente à `git reset HEAD` | Non |
+| `git restore  <fichier>` | Réinitialise complètement (perte de modifs non commit) | Oui |
+
+
+8. Ré appliquer les modifications de la question 4.
+
+9. Ajouter en staging et commit
+
+```bash
+git add README.md
+git commit -m "[TICKET-999] Modification du fichier README.md"
+```
+
+10. Modifier un commit
+
+Mince, avant de pousser le commit nous nous sommes tromper de numéro de ticket. 
+Utiliser  `git commit --amend` pour modifier le message et  `git log -n` pour vérifier les `n` derniers commit.
+
+```bash
+git commit --amend  -m "[TICKET-123] Modification du fichier README.md"
+git log -1
+```
+
+11. Pousser sur la brance distante
+
+Si le commit n'était pas déjà poussé : 
+
+```bash
+git push origin
+```
+
+Si le commit modifié était déjà poussé
+
+```bash
+git push --force-with-lease
+```
+
+:warning:
+
+| Option | Effet | Risque |
+|--------|-------|--------|
+| `git push --force` | Force le push et remplace tout l’historique distant | Risque d’écraser les commits des autres contributeurs |
+| `git push --force-with-lease` | Force le push uniquement si personne n’a modifié la branche distante depuis le dernier `fetch` | Plus sûr : évite d’écraser le travail des autres |
+
 
 ## Branches et navigation
 
@@ -141,14 +226,7 @@ git restore --staged README.md
 `git push -u origin nom-de-la-branche`, `git branch -r`, `git branch -a`
 
 ### Exercices
-1. Crée une nouvelle branche locale depuis `origin/main` :  
-   `git checkout -b feature/test origin/main`  
 
-```bash
-```
-
-2. Ajoute un commit dans cette branche et pousse-la :  
-   `git push -u origin feature/test`  
 
 3. Liste les branches locales, distantes et toutes :  
    `git branch`  
@@ -332,7 +410,3 @@ git restore --staged README.md
 | `:q!` | Quitte l’éditeur sans sauvegarder (dans Vim). |
 | `:wq` | Quitte l’éditeur en sauvegardant (dans Vim). |
 
-
-<p align="center">
-  <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffbrbhaga1k2218xj77bj.png" alt="Source de l'image" width="600"/>
-</p>
