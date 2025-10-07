@@ -5,6 +5,9 @@ Chapitre 3 : Commandes utiles
 - [Gestion d'une branche](#gestion-dune-branche)
   - [Commandes concernées](#commandes-concernées)
   - [Exercices](#exercices)
+- [Première merge request](#première-merge-request)
+  - [Depuis l'interface GitHub](#depuis-linterface-github)
+  - [Mettre à jour le repos local](#mettre-à-jour-le-repos-local)
 - [Travailler en collaboration](#travailler-en-collaboration)
   - [Commandes concernées](#commandes-concernées-1)
   - [Exercices](#exercices-1)
@@ -227,6 +230,63 @@ git push --force-with-lease
 |--------|-------|--------|
 | `git push --force` | Force le push et remplace tout l’historique distant | Risque d’écraser les commits des autres contributeurs sur la branche|
 | `git push --force-with-lease` | Force le push uniquement si personne n’a modifié la branche distante depuis le dernier `fetch` | Plus sûr : évite d’écraser le travail des autres |
+
+## Première merge request
+
+### Depuis l'interface GitHub
+
+Nous allons créer la merge request via l’interface web de GitHub.
+
+1. Dans GitHub : New Pull Request → base = main, compare = develop
+2. Clique sur Create Pull Request 
+3. Regarder les changements, s'il n'y a pas de conflit
+4. Merger pour valider la Pull Request
+
+### Mettre à jour le repos local
+
+Nous venons de faire des modifications en ligne mais il faut les synchroniser avec notre repos local.
+
+1. Vérifier depuis quand la branche n'a pas été mise à jour
+
+```bash
+# Se placer sur main locale
+git checkout main
+
+# Vérifier la branche et les commits derrière/avant le remote
+git fetch origin
+git status
+```
+
+2. Mettre à jour la branche locale
+
+```bash
+git pull origin main
+```
+
+- `pull` = `fetch` + `merge`
+
+La branche locale `main` est maintenant à jour avec GitHub online.
+
+3. Créer un tag sur la version de la branche `main`
+   
+```bash
+git tag -a v1.0.0 -m "Release version 1.0.0"
+
+# Vérifier le tag
+git tag
+
+# Afficher les détails du tag
+git show v1.0.0
+
+# Pousser le tag sur le dépôt distant
+git push origin v1.0.0
+```
+
+- `-a` : annoté
+- `-m` : message du tag
+
+
+:bulb: Le tag devient visible sur GitHub
 
 
 ## Travailler en collaboration
