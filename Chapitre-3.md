@@ -2,10 +2,10 @@ Chapitre 3 : Commandes utiles
 
 
 - [Objectifs](#objectifs)
-- [Gestion de base des fichiers (add, commit, push, restore, reset)](#gestion-de-base-des-fichiers-add-commit-push-restore-reset)
+- [Gestion d'une branche](#gestion-dune-branche)
   - [Commandes concernées](#commandes-concernées)
   - [Exercices](#exercices)
-- [Branches et navigation](#branches-et-navigation)
+- [Travailler en collaboration](#travailler-en-collaboration)
   - [Commandes concernées](#commandes-concernées-1)
   - [Exercices](#exercices-1)
 - [Stash (mettre de côté du travail temporairement)](#stash-mettre-de-côté-du-travail-temporairement)
@@ -49,7 +49,7 @@ Voici les objectifs de ce module :
 - [ ] Sélectionner des commits précis (`cherry-pick`).  
 - [ ] Gérer des versions avec des tags (`tag`, `show`)
 
-## Gestion de base des fichiers (add, commit, push, restore, reset)
+## Gestion d'une branche
 
 Dans cette partie, nous allons concidérer que nous avons cette méthodologie de gestion de branche.
 
@@ -188,7 +188,7 @@ git commit -m "[TICKET-999] Modification du fichier README.md"
 
 10. Modifier un commit
 
-Mince, avant de pousser le commit nous nous sommes tromper de numéro de ticket. 
+Mince, avant de pousser le commit nous nous sommes trompés de numéro de ticket. 
 Utiliser  `git commit --amend` pour modifier le message et  `git log -n` pour vérifier les `n` derniers commit.
 
 ```bash
@@ -196,7 +196,18 @@ git commit --amend  -m "[TICKET-123] Modification du fichier README.md"
 git log -1
 ```
 
-11. Pousser sur la brance distante
+:bulb: Il est aussi possible d'ajouter des nouveaux changements sur le dernier commit, pour cela il suffit d'ajouter les fichiers concernés en staging puis de renouveller l'étape `git commit --amend`
+
+```bash
+git add <votre-fichier>
+git commit --amend  --no-edit
+git log -1
+```
+
+- `--no-edit` : Ajoute des changements au dernier commit sans modifier son message.
+  
+
+11.  Pousser le commit actualisé sur la branche distante
 
 Si le commit n'était pas déjà poussé : 
 
@@ -214,11 +225,19 @@ git push --force-with-lease
 
 | Option | Effet | Risque |
 |--------|-------|--------|
-| `git push --force` | Force le push et remplace tout l’historique distant | Risque d’écraser les commits des autres contributeurs |
+| `git push --force` | Force le push et remplace tout l’historique distant | Risque d’écraser les commits des autres contributeurs sur la branche|
 | `git push --force-with-lease` | Force le push uniquement si personne n’a modifié la branche distante depuis le dernier `fetch` | Plus sûr : évite d’écraser le travail des autres |
 
 
-## Branches et navigation
+## Travailler en collaboration
+
+Dans cette partie, nous allons concidérer que nous avons cette méthodologie de gestion de branche.
+
+<p align="center">
+  <img src="https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fmufdlg3q1xj9tbzv0geg.png" alt="Source de l'image" width="600"/>
+</p>
+
+
 
 ### Commandes concernées
 `git checkout -b nom-branche origin/nom-distant`,  
@@ -334,8 +353,6 @@ git push --force-with-lease
 ## Amend et push forcé
 
 ### Commandes concernées
-`git commit --amend -m "Nouveau message"`,  
-`git commit --amend --no-edit`,  
 `git push --force-with-lease`
 
 ### Exercices
@@ -343,7 +360,6 @@ git push --force-with-lease
 2. Corrige-le avec `git commit --amend -m "Meilleur message"`.  
 3. Ajoute un oubli dans le commit précédent et utilise `git commit --amend --no-edit`.  
 4. Envoie les changements avec `git push --force-with-lease`.
-
 
 
 ## Fetch et nettoyage
