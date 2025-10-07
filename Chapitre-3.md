@@ -1,42 +1,28 @@
 Chapitre 3 : Commandes utiles
 
 
-- [Objectifs](#objectifs)
-- [Gestion d'une branche](#gestion-dune-branche)
-  - [Commandes concernées](#commandes-concernées)
-  - [Exercices](#exercices)
-- [Première merge request](#première-merge-request)
-  - [Depuis l'interface GitHub](#depuis-linterface-github)
-  - [Mettre à jour le repos local](#mettre-à-jour-le-repos-local)
-- [Travailler en collaboration](#travailler-en-collaboration)
-  - [Commandes concernées](#commandes-concernées-1)
-  - [Exercices](#exercices-1)
-- [Stash (mettre de côté du travail temporairement)](#stash-mettre-de-côté-du-travail-temporairement)
-  - [Commandes concernées](#commandes-concernées-2)
-  - [Exercices](#exercices-2)
-- [Historique et logs](#historique-et-logs)
-  - [Commandes concernées](#commandes-concernées-3)
-  - [Exercices](#exercices-3)
-- [Reset et restauration de versions](#reset-et-restauration-de-versions)
-  - [Commandes concernées](#commandes-concernées-4)
-  - [Exercices](#exercices-4)
-- [Rebase et fusion de commits](#rebase-et-fusion-de-commits)
-  - [Commandes concernées](#commandes-concernées-5)
-  - [Exercices](#exercices-5)
-- [Cherry-pick](#cherry-pick)
-  - [Commandes concernées](#commandes-concernées-6)
-  - [Exercices](#exercices-6)
-- [Tags](#tags)
-  - [Commandes concernées](#commandes-concernées-7)
-  - [Exercices](#exercices-7)
-- [Amend et push forcé](#amend-et-push-forcé)
-  - [Commandes concernées](#commandes-concernées-8)
-  - [Exercices](#exercices-8)
-- [Fetch et nettoyage](#fetch-et-nettoyage)
-  - [Commandes concernées](#commandes-concernées-9)
-  - [Exercices](#exercices-9)
-- [Liens utiles](#liens-utiles)
-- [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
+- [Partie en cours de modification](#partie-en-cours-de-modification)
+    - [Commandes concernées](#commandes-concernées-1)
+  - [Stash (mettre de côté du travail temporairement)](#stash-mettre-de-côté-du-travail-temporairement)
+    - [Commandes concernées](#commandes-concernées-2)
+    - [Exercices](#exercices-1)
+  - [Historique et logs](#historique-et-logs)
+    - [Commandes concernées](#commandes-concernées-3)
+    - [Exercices](#exercices-2)
+  - [Reset et restauration de versions](#reset-et-restauration-de-versions)
+    - [Commandes concernées](#commandes-concernées-4)
+    - [Exercices](#exercices-3)
+  - [Rebase et fusion de commits](#rebase-et-fusion-de-commits)
+    - [Commandes concernées](#commandes-concernées-5)
+    - [Exercices](#exercices-4)
+  - [Cherry-pick](#cherry-pick)
+    - [Commandes concernées](#commandes-concernées-6)
+    - [Exercices](#exercices-5)
+  - [nettoyage](#nettoyage)
+    - [Commandes concernées](#commandes-concernées-7)
+    - [Exercices](#exercices-6)
+  - [Liens utiles](#liens-utiles)
+  - [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
 
 
 ## Objectifs
@@ -298,23 +284,50 @@ Dans cette partie, nous allons concidérer que nous avons cette méthodologie de
 </p>
 
 
+1. Executer ces commandes pour que le repos ressemble à la méthodologie de gestion de branche ci-dessus : 
+
+```bash
+# --- S'assurer d'être à jour avec origin/main ---
+git checkout main
+git pull origin
+
+# Branche feature/toto from origin/main
+git checkout -b feature/toto origin/main
+
+# Créer et pousser un fichier pour feature/toto
+echo "# Fichier feature/toto" > toto.md
+echo "Contenu initial pour feature/toto" >> toto.md
+git add toto.md
+git commit -m "Ajout du fichier toto.md sur feature/toto"
+git push -u origin feature/toto
+
+# Branche feature/tata from origin/main
+git checkout -b feature/tata origin/main
+
+# Créer et pousser un fichier pour feature/tata
+echo "# Fichier feature/tata" > tata.md
+echo "Contenu initial pour feature/tata" >> tata.md
+git add tata.md
+git commit -m "Ajout du fichier tata.md sur feature/tata"
+git push -u origin feature/tata
+```
+
+2. 
+
+
+
+
+
+
+# Partie en cours de modification
+
+
+
 
 ### Commandes concernées
 `git checkout -b nom-branche origin/nom-distant`,  
 `git branch -D nom-de-la-branche`, `git push origin --delete nom-de-la-branche`,  
 `git push -u origin nom-de-la-branche`, `git branch -r`, `git branch -a`
-
-### Exercices
-
-
-3. Liste les branches locales, distantes et toutes :  
-   `git branch`  
-   `git branch -r`  
-   `git branch -a`  
-
-4. Supprime la branche localement et sur le distant :  
-   `git branch -D feature/test`  
-   `git push origin --delete feature/test`
 
 
 
@@ -397,35 +410,20 @@ Dans cette partie, nous allons concidérer que nous avons cette méthodologie de
 
 
 
-## Tags
+## nettoyage
 
 ### Commandes concernées
-`git tag -a v1.0.0 -m "Release v1.0.0"`, `git tag`,  
-`git show v1.0.0`
-
-### Exercices
-1. Crée un tag annoté `git tag -a v1.0.0 -m "Release v1.0.0"`.  
-2. Liste tous les tags avec `git tag`.  
-3. Inspecte le contenu avec `git show v1.0.0`.
+`git fetch --prune`
 
 
+3. Liste les branches locales, distantes et toutes :  
+   `git branch`  
+   `git branch -r`  
+   `git branch -a`  
 
-## Amend et push forcé
-
-### Commandes concernées
-`git push --force-with-lease`
-
-### Exercices
-1. Fais un commit avec un mauvais message.  
-2. Corrige-le avec `git commit --amend -m "Meilleur message"`.  
-3. Ajoute un oubli dans le commit précédent et utilise `git commit --amend --no-edit`.  
-4. Envoie les changements avec `git push --force-with-lease`.
-
-
-## Fetch et nettoyage
-
-### Commandes concernées
-`git fetch --all`, `git fetch --prune`
+4. Supprime la branche localement et sur le distant :  
+   `git branch -D feature/test`  
+   `git push origin --delete feature/test`
 
 ### Exercices
 1. Lance `git fetch --all` pour mettre à jour toutes les branches distantes.  
