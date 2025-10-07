@@ -22,6 +22,7 @@ Chapitre 3 : Commandes utiles
     - [Commandes concernées](#commandes-concernées-7)
     - [Exercices](#exercices-6)
   - [Liens utiles](#liens-utiles)
+  - [Aller plus loin](#aller-plus-loin)
   - [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
 
 
@@ -436,6 +437,11 @@ git push -u origin feature/tata
 - [Get Started - GitHub](https://docs.github.com/fr/get-started/start-your-journey/hello-world)
 - [Get started - GitHub Desktop](https://docs.github.com/fr/desktop/overview/getting-started-with-github-desktop)
 - [6 Types of Git Branching](https://dev.to/juniourrau/6-types-of-git-branching-strategy-g54)
+
+## Aller plus loin
+
+- git graph
+- git ignore
 
 ## Tableau récapitulatif des commandes Git
 
