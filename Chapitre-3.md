@@ -144,6 +144,9 @@ git restore --staged README.md
 1. Crée une nouvelle branche locale depuis `origin/main` :  
    `git checkout -b feature/test origin/main`  
 
+```bash
+```
+
 2. Ajoute un commit dans cette branche et pousse-la :  
    `git push -u origin feature/test`  
 
@@ -328,3 +331,6 @@ git restore --staged README.md
 | `git push --force-with-lease` | Met à jour l’historique distant après rebase ou amend, sans écraser les commits d’autrui. |
 | `:q!` | Quitte l’éditeur sans sauvegarder (dans Vim). |
 | `:wq` | Quitte l’éditeur en sauvegardant (dans Vim). |
+
+
+![test](https://media2.dev.to/dynamic/image/width=800%2Cheight=%2Cfit=scale-down%2Cgravity=auto%2Cformat=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Ffbrbhaga1k2218xj77bj.png)
