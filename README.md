@@ -5,6 +5,14 @@ Chaque chapitre est présenté dans un fichier `.md` distinct pour faciliter la 
 
 ## Contenu du tutoriel  
 
+### 0. Git avec Github Desktop
+- Créer un compte GitHub
+- Créer un dépôt (repository) en ligne sur GitHub
+- Gérer un projet localement avec GitHub Desktop
+- Comprendre les notions de commit, branche et synchronisation
+- Travailler en équipe sans ligne de commande
+
+
 ### 1. Introduction à Git  
 - Qu'est-ce que Git ?  
 - Installation et configuration  

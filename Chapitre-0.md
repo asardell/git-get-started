@@ -19,6 +19,11 @@
   - [Étape 3 – Fusionner la branche (merge)](#étape-3--fusionner-la-branche-merge)
 - [Collaborer à plusieurs sur un projet](#collaborer-à-plusieurs-sur-un-projet)
 - [Récapitulatif visuel du workflow GitHub Desktop](#récapitulatif-visuel-du-workflow-github-desktop)
+- [Mettre à jour son dépôt avec *Fetch*](#mettre-à-jour-son-dépôt-avec-fetch)
+  - [Pourquoi faire un *Fetch* ?](#pourquoi-faire-un-fetch-)
+  - [Faire un *Fetch* avec **GitHub Desktop**](#faire-un-fetch-avec-github-desktop)
+  - [Pourquoi c’est important](#pourquoi-cest-important)
+  - [En résumé](#en-résumé)
 - [Conseils et bonnes pratiques](#conseils-et-bonnes-pratiques)
 - [À retenir](#à-retenir)
 - [Liens utiles](#liens-utiles)
@@ -157,6 +162,50 @@ Les collaborateurs peuvent **cloner**, **modifier**, **committer** et **pousser*
 | 4 | **Push** | Envoyer vos changements sur GitHub |
 | 5 | **Pull** | Récupérer les modifications faites par les autres |
 | 6 | **Branch / Merge** | Travailler sur des fonctionnalités séparées puis fusionner |
+
+# Mettre à jour son dépôt avec *Fetch*
+
+Lorsque plusieurs personnes travaillent sur le même projet, il est **très important** de garder son dépôt local **synchronisé** avec la version en ligne (le dépôt distant sur GitHub).
+
+C’est là qu’intervient la commande **Fetch**, ou “Récupérer les modifications”.
+
+## Pourquoi faire un *Fetch* ?
+
+Imagine que ton dépôt GitHub Desktop contient les fichiers du projet au moment où tu les as clonés.  
+Pendant ce temps, un camarade ou ton enseignant peut avoir ajouté, modifié ou supprimé des fichiers directement sur GitHub.
+
+Si tu ne fais rien, ton dépôt local risque de devenir **obsolète**.  
+👉 Le *Fetch* permet de **vérifier et télécharger les changements récents** faits sur GitHub **sans les fusionner automatiquement** dans ton travail.
+
+C’est donc une étape de **vérification et de préparation** avant une mise à jour complète.
+
+## Faire un *Fetch* avec **GitHub Desktop**
+
+1. Ouvre ton projet dans **GitHub Desktop**.  
+2. En haut à droite, clique sur le bouton **"Fetch origin"** (ou “Récupérer l’origine”).  
+3. GitHub Desktop va alors demander à GitHub :  
+   > “Y a-t-il eu des modifications depuis ma dernière synchronisation ?”
+
+- Si tout est à jour :  
+  *“This branch is up to date with origin/main.”*  
+- Si des changements ont été faits en ligne :  
+  *“New commits available.”*  
+  → Clique sur **"Pull origin"** pour **récupérer les fichiers à jour**.
+
+## Pourquoi c’est important
+
+- Évite les **conflits de code** quand plusieurs personnes modifient les mêmes fichiers.  
+- Permet de toujours travailler sur la **dernière version** du projet.  
+- Aide à comprendre **ce qui a changé** avant d’intégrer les modifications.
+
+## En résumé
+
+| Action | Outil | Effet principal |
+|--------|--------|----------------|
+| **Fetch** | GitHub Desktop | Vérifie les changements sur le dépôt distant (sans modifier ton travail) |
+| **Pull** | GitHub Desktop | Récupère et fusionne les changements distants dans ton dépôt local |
+| **Push** | GitHub Desktop | Envoie tes modifications locales vers le dépôt GitHub |
+
 
 # Conseils et bonnes pratiques
 
