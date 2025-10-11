@@ -107,8 +107,6 @@ Chaque chapitre est présenté dans un fichier `.md` distinct pour faciliter la 
 | `git commit --amend --no-edit` | Met à jour le contenu du dernier commit sans modifier son message |
 | `git push --force-with-lease` | Met à jour la branche distante avec la version corrigée (après un amend) |
 
-
-
 ## Liens utiles
 
 - [Stratégie de gestion de branches](https://dev.to/juniourrau/6-types-of-git-branching-strategy-g54)
