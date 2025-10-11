@@ -12,7 +12,6 @@ Chaque chapitre est présenté dans un fichier `.md` distinct pour faciliter la 
 - Comprendre les notions de commit, branche et synchronisation
 - Travailler en équipe sans ligne de commande
 
-
 ### 1. Introduction à Git  
 - Qu'est-ce que Git ?  
 - Installation et configuration  
