@@ -28,6 +28,12 @@ Chapitre 3 : Commandes utiles
   - [`git show <commit|tag>`](#git-show-committag-1)
 - [Liens utiles](#liens-utiles)
 - [Aller plus loin](#aller-plus-loin)
+  - [Git Graph](#git-graph)
+    - [Qu’est-ce que Git Graph ?](#quest-ce-que-git-graph-)
+    - [Installation](#installation)
+    - [Utilisation](#utilisation)
+  - [Le fichier `.gitignore`](#le-fichier-gitignore)
+    - [Pourquoi utiliser `.gitignore` ?](#pourquoi-utiliser-gitignore-)
 - [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
 
 
@@ -628,8 +634,51 @@ git show v1.1.0
 
 ## Aller plus loin
 
-- git graph
-- git ignore
+### Git Graph
+
+#### Qu’est-ce que Git Graph ?
+
+- Git Graph est une **extension populaire pour Visual Studio Code**.  
+- Elle permet de **visualiser les branches, merges et commits** sous forme de graphe interactif.  
+- Très utile pour suivre les **rebase, merges et conflits**, surtout dans des projets collaboratifs avec plusieurs branches.
+
+#### Installation
+
+1. Ouvrir VS Code.  
+2. Aller dans l’onglet Extensions (`Ctrl+Shift+X`).  
+3. Chercher **Git Graph** et cliquer sur **Installer**.  
+
+#### Utilisation
+
+- Ouvrir Git Graph depuis la barre d’outils ou la palette de commandes (`Ctrl+Shift+P` → Git Graph).  
+- Le graphe affiche :  
+  - Les branches locales et distantes  
+  - Les commits avec leurs messages  
+  - Les merges et rebase  
+- On peut cliquer sur un commit pour voir :  
+  - Les fichiers modifiés  
+  - Les diffs  
+  - Créer une branche ou checkout directement depuis le graphe
+
+### Le fichier `.gitignore`
+
+Le fichier `.gitignore` permet à Git de **ne pas suivre certains fichiers ou dossiers** dans un  dépôt. Cela évite d’inclure dans l’historique des fichiers **temporaires, sensibles ou générés automatiquement**.
+
+#### Pourquoi utiliser `.gitignore` ?
+
+- Ne pas versionner les fichiers temporaires
+- Ne pas versionner les fichiers spécifiques à ton environnement ou IDE
+- Ne pas versionner les dépendances installées localement 
+- Protéger les informations sensibles
+
+:bulb: Chaque projet peut avoir son propre `.gitignore`. GitHub propose aussi des modèles préconfigurés pour Python, Node.js, Java, etc.
+
+
+Pour créer son fichier `.gitignore`, on execute la commande suivante à la racine de son projet
+
+```bash
+touch .gitignore
+```
 
 ## Tableau récapitulatif des commandes Git
 
