@@ -1,29 +1,34 @@
 Chapitre 3 : Commandes utiles
 
 
-- [Partie en cours de modification](#partie-en-cours-de-modification)
-    - [Commandes concernées](#commandes-concernées-1)
-  - [Stash (mettre de côté du travail temporairement)](#stash-mettre-de-côté-du-travail-temporairement)
-    - [Commandes concernées](#commandes-concernées-2)
-    - [Exercices](#exercices-1)
-  - [Historique et logs](#historique-et-logs)
-    - [Commandes concernées](#commandes-concernées-3)
-    - [Exercices](#exercices-2)
-  - [Reset et restauration de versions](#reset-et-restauration-de-versions)
-    - [Commandes concernées](#commandes-concernées-4)
-    - [Exercices](#exercices-3)
-  - [Rebase et fusion de commits](#rebase-et-fusion-de-commits)
-    - [Commandes concernées](#commandes-concernées-5)
-    - [Exercices](#exercices-4)
-  - [Cherry-pick](#cherry-pick)
-    - [Commandes concernées](#commandes-concernées-6)
-    - [Exercices](#exercices-5)
-  - [nettoyage](#nettoyage)
-    - [Commandes concernées](#commandes-concernées-7)
-    - [Exercices](#exercices-6)
-  - [Liens utiles](#liens-utiles)
-  - [Aller plus loin](#aller-plus-loin)
-  - [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
+- [Objectifs](#objectifs)
+- [Gestion d'une branche](#gestion-dune-branche)
+  - [Commandes concernées](#commandes-concernées)
+  - [Exercices](#exercices)
+- [Première merge request](#première-merge-request)
+  - [Depuis l'interface GitHub](#depuis-linterface-github)
+  - [Mettre à jour le repos local](#mettre-à-jour-le-repos-local)
+- [Travailler en collaboration](#travailler-en-collaboration)
+- [Explorer l'historique](#explorer-lhistorique)
+  - [`git log -n --oneline`](#git-log--n---oneline)
+  - [`git log origin/main -n 10 --oneline`](#git-log-originmain--n-10---oneline)
+  - [`git show <commit|tag>`](#git-show-committag)
+- [Gestion de conflit lors d’un rebase](#gestion-de-conflit-lors-dun-rebase)
+  - [Créer la branche `titi` :](#créer-la-branche-titi-)
+  - [Créer la branche `tutu` depuis `develop` :](#créer-la-branche-tutu-depuis-develop-)
+  - [Rebase de `tutu` sur `titi`](#rebase-de-tutu-sur-titi)
+  - [Identifier et résoudre le conflit](#identifier-et-résoudre-le-conflit)
+  - [Résoudre le conflit](#résoudre-le-conflit)
+  - [Continuer le rebase](#continuer-le-rebase)
+  - [Vérification](#vérification)
+  - [Astuces](#astuces)
+- [Explorer l'historique](#explorer-lhistorique-1)
+  - [`git log -n --oneline`](#git-log--n---oneline-1)
+  - [`git log origin/main -n 10 --oneline`](#git-log-originmain--n-10---oneline-1)
+  - [`git show <commit|tag>`](#git-show-committag-1)
+- [Liens utiles](#liens-utiles)
+- [Aller plus loin](#aller-plus-loin)
+- [Tableau récapitulatif des commandes Git](#tableau-récapitulatif-des-commandes-git)
 
 
 ## Objectifs
@@ -56,12 +61,12 @@ Dans cette partie, nous allons concidérer que nous avons cette méthodologie de
 1. Actualiser le repos local à partir du repos distant :
 
 ```bash
-git fetch --all
+git fetch origin
 ```
 
 - `git fetch` : récupère les commits, branches et tags distants sans les appliquer à ta branche locale.
 
-- `--all` : applique cette opération à toutes les branches.
+- `origin` : nom par défaut du repos distant
 
 2. Créer une nouvelle branche locale depuis `origin/main` :  
 
@@ -313,127 +318,307 @@ git commit -m "Ajout du fichier tata.md sur feature/tata"
 git push -u origin feature/tata
 ```
 
-2. MR toto dans develop
-3. Rebase tata from develop
-4. MR tata dans develop
-5. Squash des 2 derniers commit de develop
-6. MR de develop sur main
-7. Tag de main V1.1.0
-8. Nettoyage branche local avec prune
+2. Effectuer une Merge Request (MR) de `feature/toto` dans `develop`
+
+Cette étape se fait sur **GitHub online**. Après validation, la branche `feature/toto` est fusionnée dans `develop`.
 
 
+3. Effecteur un rebase de la branche `tata` à partir de  `develop` pour récupérer les changements
 
-# Partie en cours de modification
+```bash
+# Se placer sur la branche feature/tata
+git checkout feature/tata
 
+# Rebase directement depuis origin/develop
+git fetch origin
+git rebase origin/develop
+```
 
+4. Pousser les changements sur la branche distant (cas : sans conflit)
 
+```bash
+git push origin feature/tata #si pas de conflit
+```
 
-### Commandes concernées
-`git checkout -b nom-branche origin/nom-distant`,  
-`git branch -D nom-de-la-branche`, `git push origin --delete nom-de-la-branche`,  
-`git push -u origin nom-de-la-branche`, `git branch -r`, `git branch -a`
+5. Effectuer une Merge Request (MR) de `feature/tata` dans `develop`
 
+Cette étape se fait sur **GitHub online**. Après validation, la branche `feature/tata` est fusionnée dans `develop`.
 
+6. Squash des 2 derniers commit de `develop` pour simplifier l'historique
 
-## Stash (mettre de côté du travail temporairement)
+```bash
+git fetch origin
 
-### Commandes concernées
-`git stash`, `git stash pop`
+# Se placer sur develop
+git checkout develop
 
-### Exercices
-1. Modifie un fichier **sans le committer**.  
-2. Lance `git stash` → les changements disparaissent.  
-3. Vérifie l’état avec `git status`.  
-4. Restaure avec `git stash pop`.
+# Afficher les derniers commit
+git log -3
 
+# Rebase interactif sur les 2 derniers commits
+git rebase -i HEAD~2
+```
 
+- Dans l’éditeur qui s’ouvre, remplacer `pick` par `squash` pour fusionner le deuxième commit avec le premier.
+- Sauvegarder et quitter pour appliquer le squash.
 
-## Historique et logs
+| Commande | Description |
+|----------|-------------|
+|`ECHAP` +  `:q!` | Quitte l’éditeur sans sauvegarder (dans Vim). |
+|`ECHAP` + `:wq` | Quitte l’éditeur en sauvegardant (dans Vim). |
 
-### Commandes concernées
-`git log`, `git log -n --oneline`,  
-`git log origin/main -n 10 --oneline`, `git show v1.0.0`
+7. Pousser les changements sur la branche distante
 
-### Exercices
-1. Explore l’historique avec `git log` et navigue avec ↑ / ↓.  
-2. Résume les 5 derniers commits :  
-   `git log -5 --oneline`  
-3. Compare l’historique local et distant :  
-   `git log origin/main -n 10 --oneline`
+Si tu modifies l’historique d’une branche qui **a déjà été poussée sur le repos distant**, alors Git détectera que l’historique local ne correspond plus à celui du remote.  
 
+Dans ce cas, il faut utiliser **un push forcé** pour mettre à jour le remote avec l’historique rebased :
 
+```bash
+git push --force-with-lease
+```
 
-## Reset et restauration de versions
+:bulb: Cette option vérifie que personne n’a poussé de commits sur le remote entre-temps.  
 
-### Commandes concernées
-`git reset --soft HEAD~n`, `git reset --mixed HEAD~n`,  
-`git reset --hard HEAD~n`, `git restore --source=HEAD~1 fichier`
+8. Effectuer une Merge Request (MR) de `develop` dans `main`
 
-### Exercices
-1. Ajoute plusieurs commits rapides (`touch f1.txt`, `f2.txt`, etc.).  
-2. Teste les resets :  
-   - `git reset --soft HEAD~1` : les commits disparaissent mais les modifs restent **staged**.  
-   - `git reset --mixed HEAD~1` : les modifs restent **dans le working directory**.  
-   - `git reset --hard HEAD~1` : ⚠️ tout est supprimé.  
+Cette étape se fait sur **GitHub online**. Après validation, la branche `develop` est fusionnée dans `main`.
 
-3. Teste `git restore --source=HEAD~1 f1.txt` pour restaurer un fichier d’une version précédente.
+1. Ajouter un tag sur la version actualisé de `main`
 
+```bash
+git fetch origin
 
+# Se placer sur main
+git checkout main
+git pull origin main
 
-## Rebase et fusion de commits
+# Créer un tag annoté
+git tag -a V1.1.0 -m "Version 1.1.0"
 
-### Commandes concernées
-`git pull --rebase origin nom-branche`,  
-`git rebase -i HEAD~n`,  
-`git rebase origin/xxx/xxx`,  
-`git rebase -i origin/release/xxx-1.5.0`
-
-### Exercices
-1. Mets-toi sur une branche de test et fais quelques commits.  
-2. Lance `git rebase -i HEAD~3`  
-   - Combine (`squash`) deux commits en un seul.  
-   - Change le message d’un commit.  
-
-3. Mets ta branche à jour avec le remote :  
-   `git pull --rebase origin main`
-
-
-
-## Cherry-pick
-
-### Commandes concernées
-`git cherry-pick <hash>`,  
-`git cherry-pick <hash1> <hash2>`,  
-`git cherry-pick <hash_début>^..<hash_fin>`
-
-### Exercices
-1. Identifie un commit intéressant dans `git log`.  
-2. Récupère-le sur ta branche courante avec `git cherry-pick <hash>`.  
-3. Teste la sélection multiple avec `git cherry-pick <hash1> <hash2>`.  
-4. Teste une plage de commits avec `git cherry-pick <hash_début>^..<hash_fin>`.
+# Pousser le tag sur le remote
+git push origin V1.1.0
+```
 
 
-
-## nettoyage
-
-### Commandes concernées
-`git fetch --prune`
+3.  Suppression des branche locales
 
 
-3. Liste les branches locales, distantes et toutes :  
-   `git branch`  
-   `git branch -r`  
-   `git branch -a`  
+```bash
+# Supprimer les branches locales fusionnées
+git branch -d feature/toto
+git branch -d feature/tata
 
-4. Supprime la branche localement et sur le distant :  
-   `git branch -D feature/test`  
-   `git push origin --delete feature/test`
+#ou
 
-### Exercices
-1. Lance `git fetch --all` pour mettre à jour toutes les branches distantes.  
-2. Supprime une branche distante depuis GitHub, puis lance `git fetch --prune`.  
-   → Vérifie qu’elle disparaît de la liste des branches distantes (`git branch -r`).
+# Supprimer les branches supprimées sur le repos distant
+git fetch -p
+```
 
+## Explorer l'historique
+
+Dans cette section, nous allons apprendre à utiliser quelques commandes Git utiles pour **explorer l’historique des commits** et **examiner un commit ou un tag spécifique**.
+
+---
+
+### `git log -n --oneline`
+
+
+```bash
+git log -n 5 --oneline
+```
+
+- `-n 5` : limite l’affichage aux **5 derniers commits**.  
+- `--oneline` : affiche chaque commit sur **une seule ligne**, avec son identifiant abrégé et le message de commit.
+
+:bulb Très pratique pour voir rapidement les derniers commits sans tout le détail.
+
+### `git log origin/main -n 10 --oneline`
+
+```bash
+git log origin/main -n 10 --oneline
+```
+
+- Affiche les **10 derniers commits** de la branche `main` sur le remote `origin`.  
+- Permet de vérifier l’état du remote sans changer ta branche locale.
+
+:bulb:  Utile pour comparer une branche locale avec le remote.
+
+
+### `git show <commit|tag>`
+
+```bash
+git show v1.1.0
+```
+
+- Affiche les **détails d’un commit ou d’un tag** :  
+- Peut être utilisé avec un **hash de commit** (id d'un commit) ou un **tag** (`v1.1.0`).
+
+:bulb: Très pratique pour inspecter le contenu exact d’un commit ou d’un tag, surtout avant un merge.
+
+## Gestion de conflit lors d’un rebase
+
+Dans cette section, nous allons créer un **exemple concret** pour voir comment gérer un conflit qui apparaît lors d’un rebase.
+
+### Créer la branche `titi` :
+
+```bash
+git fetch origin
+git checkout -b feature/titi origin/develop
+```
+
+Modifier un fichier `example.txt` :
+
+```bash
+echo "Contenu de titi" > example.txt
+git add example.txt
+git commit -m "Modification sur feature/titi"
+git push -u origin feature/titi
+```
+
+### Créer la branche `tutu` depuis `develop` :
+
+```bash
+git checkout -b feature/tutu origin/develop
+```
+
+Modifier **un fichier avec le même nom `example.txt`** :
+
+```bash
+echo "Contenu de tutu" > example.txt
+git add example.txt
+git commit -m "Modification sur feature/tutu"
+git push -u origin feature/tutu
+```
+
+### Rebase de `tutu` sur `titi`
+
+```bash
+git fetch origin
+git checkout feature/tutu
+git rebase origin/feature/titi
+```
+
+:warning: Ici, Git détecte un **conflit**, car `example.txt` a été modifié dans les deux branches.
+
+### Identifier et résoudre le conflit
+
+Git indique les fichiers en conflit :
+
+```bash
+CONFLICT (content): Merge conflict in example.txt
+```
+
+Ouvrir le fichier `example.txt` :
+
+````markdown
+```text
+<<<<<<< HEAD
+Contenu de tutu
+=======
+Contenu de titi
+>>>>>>> feature/titi
+```
+````
+
+- Tout ce qui est **entre `<<<<<<< HEAD` et `=======`** correspond à ta branche actuelle (`tutu`).  
+- Tout ce qui est **entre `=======` et `>>>>>>> feature/titi`** correspond à la branche sur laquelle tu rebases (`titi`).
+
+### Résoudre le conflit
+
+Éditer le fichier pour choisir le contenu désiré, par exemple :
+
+```text
+Contenu combiné : titi + tutu
+```
+
+Puis :
+
+```bash
+git add example.txt
+```
+
+---
+
+### Continuer le rebase
+
+- Git peut demander plusieurs étapes si plusieurs fichiers ont des conflits.  
+- Une fois tous les conflits résolus :
+
+```bash
+git rebase --continue
+git push --force-with-lease
+```
+
+### Vérification
+
+- Afficher l’historique pour vérifier que le rebase est terminé :
+
+```bash
+git log --oneline --graph
+```
+
+- Le commit de `feature/tutu` est maintenant "rejoué" au-dessus de `feature/titi`.
+
+
+### Astuces
+
+1. **Avant un rebase**, toujours faire `git fetch origin` pour être sûr que le remote est à jour.  
+2. En cas de conflit complexe, il est possible d’utiliser :
+
+```bash
+git status
+```
+
+pour voir les fichiers en conflit et `git diff` pour examiner les différences.  
+
+
+3. Pour annuler un rebase en cours si ça devient trop compliqué :
+
+```bash
+git rebase --abort
+```
+
+
+## Explorer l'historique
+
+Dans cette section, nous allons apprendre à utiliser quelques commandes Git utiles pour **explorer l’historique des commits** et **examiner un commit ou un tag spécifique**.
+
+---
+
+### `git log -n --oneline`
+
+
+```bash
+git log -n 5 --oneline
+```
+
+- `-n 5` : limite l’affichage aux **5 derniers commits**.  
+- `--oneline` : affiche chaque commit sur **une seule ligne**, avec son identifiant abrégé et le message de commit.
+
+:bulb Très pratique pour voir rapidement les derniers commits sans tout le détail.
+
+### `git log origin/main -n 10 --oneline`
+
+```bash
+git log origin/main -n 10 --oneline
+```
+
+- Affiche les **10 derniers commits** de la branche `main` sur le remote `origin`.  
+- Permet de vérifier l’état du remote sans changer ta branche locale.
+
+:bulb:  Utile pour comparer une branche locale avec le remote.
+
+
+### `git show <commit|tag>`
+
+```bash
+git show v1.1.0
+```
+
+- Affiche les **détails d’un commit ou d’un tag** :  
+- Peut être utilisé avec un **hash de commit** (id d'un commit) ou un **tag** (`v1.1.0`).
+
+:bulb: Très pratique pour inspecter le contenu exact d’un commit ou d’un tag, surtout avant un merge.
 
 ## Liens utiles
 
